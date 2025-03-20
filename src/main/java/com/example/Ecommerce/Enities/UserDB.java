@@ -12,8 +12,8 @@ import java.util.List;
 
 @Entity
 @Data
-@Table(name = "authentications")
-public class AuthenticationDB implements UserDetails {
+@Table(name = "users")
+public class UserDB implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

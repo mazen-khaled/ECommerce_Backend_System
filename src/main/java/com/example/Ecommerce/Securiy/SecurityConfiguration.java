@@ -1,4 +1,4 @@
-package com.example.Ecommerce.Configurations;
+package com.example.Ecommerce.Securiy;
 
 import com.example.Ecommerce.JWT.JWTFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +16,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
-    private final JWTFilter jwtFilter;
-
     @Autowired
-    public SecurityConfiguration(JWTFilter jwtFilter) {
-        this.jwtFilter = jwtFilter;
-    }
+    private JWTFilter jwtFilter;
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
@@ -34,6 +30,7 @@ public class SecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/Authentication/login").permitAll()
+                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-resources/**", "/webjars/**").permitAll()
                         .requestMatchers("/api/Authentication/register-new-user").permitAll()
                         .requestMatchers("/api/get-all-users").hasAnyRole("ADMIN", "MANAGER")
                         .requestMatchers("/api/register-new-admin").hasRole("MANAGER")

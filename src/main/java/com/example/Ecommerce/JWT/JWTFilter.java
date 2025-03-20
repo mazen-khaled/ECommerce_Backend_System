@@ -1,6 +1,6 @@
 package com.example.Ecommerce.JWT;
 
-import com.example.Ecommerce.Enities.AuthenticationDB;
+import com.example.Ecommerce.Enities.UserDB;
 import com.example.Ecommerce.Services.AuthenticationServices;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -36,10 +36,10 @@ public class JWTFilter extends OncePerRequestFilter {
         }
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            AuthenticationDB userDetails = userService.loadUserByUsername(username);
-            if (jwtUtils.validateToken(token, userDetails)) {
+            UserDB userDB = userService.loadUserByUsername(username);
+            if (jwtUtils.validateToken(token, userDB)) {
                 UsernamePasswordAuthenticationToken authenticationToken =
-                        new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                        new UsernamePasswordAuthenticationToken(userDB, null, userDB.getAuthorities());
                 authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
             }
