@@ -1,4 +1,4 @@
-package com.example.Ecommerce.Securiy;
+package com.example.Ecommerce.Security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -10,21 +10,21 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/Authentication")
+@RequestMapping("/api/users")
 public class UserController {
     @Autowired
     private UserServices userServices;
 
     @PostMapping("/register-new-user")
     public UserDB createUser(@RequestBody UserDB user) {
-        user.setRole(Role.USER);
+        user.setRole(Role.ROLE_USER);
         return userServices.createUser(user);
     }
 
     @PostMapping("/register-new-admin")
     @PreAuthorize("hasRole('MANAGER')")
     public UserDB createAdmin(@RequestBody UserDB user) {
-        user.setRole(Role.ADMIN);
+        user.setRole(Role.ROLE_ADMIN);
         return userServices.createUser(user);
     }
 

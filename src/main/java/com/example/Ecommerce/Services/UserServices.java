@@ -28,6 +28,6 @@ public class UserServices {
     }
 
     public List<UserDB> getAllAdmins() {
-        return userRepository.findByRole(Role.ADMIN.name());
+        return userRepository.findByRole(Role.ROLE_ADMIN.name());
     }
 }

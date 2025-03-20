@@ -28,7 +28,7 @@ public class UserDBConfiguration implements CommandLineRunner {
             UserDB defaultUser = new UserDB();
             defaultUser.setUsername("mazen");
             defaultUser.setPassword(passwordEncoder.encode("1234")); // Encode the password
-            defaultUser.setRole(Role.MANAGER);
+            defaultUser.setRole(Role.ROLE_MANAGER);
 
             // Save the default user to the database
             authenticationRepository.save(defaultUser);

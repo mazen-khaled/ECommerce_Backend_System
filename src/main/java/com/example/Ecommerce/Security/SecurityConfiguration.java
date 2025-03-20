@@ -1,4 +1,4 @@
-package com.example.Ecommerce.Securiy;
+package com.example.Ecommerce.Security;
 
 import com.example.Ecommerce.JWT.JWTFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,11 +29,26 @@ public class SecurityConfiguration {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/Authentication/login").permitAll()
-                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-resources/**", "/webjars/**").permitAll()
-                        .requestMatchers("/api/Authentication/register-new-user").permitAll()
-                        .requestMatchers("/api/get-all-users").hasAnyRole("ADMIN", "MANAGER")
-                        .requestMatchers("/api/register-new-admin").hasRole("MANAGER")
+                        .requestMatchers(
+                                "/api/users/register-new-user",
+                                "/api/Authentication/login",
+                                "/swagger-ui/**",
+                                "/v3/api-docs/**",
+                                "/swagger-resources/**",
+                                "/webjars/**"
+                        )
+                        .permitAll()
+
+                        .requestMatchers(
+                                "/api/users/get-all-users"
+                        )
+                        .hasAnyRole("ADMIN", "MANAGER")
+
+                        .requestMatchers(
+                                "/api/users/register-new-admin"
+                        )
+                        .hasRole("MANAGER")
+
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session
