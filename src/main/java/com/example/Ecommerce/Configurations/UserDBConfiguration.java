@@ -25,16 +25,19 @@ public class UserDBConfiguration implements CommandLineRunner {
         // Check if the default user already exists
         if (authenticationRepository.findByUsername("mazen").isEmpty()) {
             // Create the default user
-            UserDB defaultUser = new UserDB();
-            defaultUser.setUsername("mazen");
-            defaultUser.setPassword(passwordEncoder.encode("1234")); // Encode the password
-            defaultUser.setRole(Role.ROLE_MANAGER);
+            UserDB MangerConfig = new UserDB();
+            MangerConfig.setUsername("MazenIsYourBoss");
+            MangerConfig.setPassword(passwordEncoder.encode("1234")); // Encode the password
+            MangerConfig.setRole(Role.ROLE_MANAGER);
+            MangerConfig.setName("Mazen Khaled");
+            MangerConfig.setEmail("kmazen275@gmail.com");
+            MangerConfig.setPhone_number("01205843080");
 
             // Save the default user to the database
-            authenticationRepository.save(defaultUser);
-            System.out.println("Default user 'mazen' created with role MANAGER.");
+            authenticationRepository.save(MangerConfig);
+            System.out.println("Your CEO 'Mazen Khaled' Account has been created");
         } else {
-            System.out.println("Default user 'mazen' already exists.");
+            System.out.println("Your CEO 'Mazen Khaled' Account has been created before");
         }
     }
 }

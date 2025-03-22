@@ -15,27 +15,24 @@ public class UserController {
     @Autowired
     private UserServices userServices;
 
-    @PostMapping("/register-new-user")
+    @PostMapping("/register-new-customer")
     public UserDB createUser(@RequestBody UserDB user) {
-        user.setRole(Role.ROLE_USER);
+        user.setRole(Role.ROLE_CUSTOMER);
         return userServices.createUser(user);
     }
 
     @PostMapping("/register-new-admin")
-    @PreAuthorize("hasRole('MANAGER')")
     public UserDB createAdmin(@RequestBody UserDB user) {
         user.setRole(Role.ROLE_ADMIN);
         return userServices.createUser(user);
     }
 
     @GetMapping("/get-all-users")
-    @PreAuthorize("hasAnyRole('ADMIN', 'MANAGER')")
     public List<UserDB> getAllUsers() {
         return userServices.getAllUsers();
     }
 
     @GetMapping("/admins")
-    @PreAuthorize("hasRole('MANAGER')")
     public List<UserDB> getAllAdmins() {
         return userServices.getAllAdmins();
     }
