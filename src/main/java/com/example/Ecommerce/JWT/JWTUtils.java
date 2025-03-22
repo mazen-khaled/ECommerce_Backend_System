@@ -1,5 +1,6 @@
 package com.example.Ecommerce.JWT;
 
+import com.example.Ecommerce.Enities.UserDB;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -26,9 +27,15 @@ public class JWTUtils {
         return Keys.hmacShaKeyFor(SECRET.getBytes());
     }
 
-    public String generateToken(UserDetails userDetails) {
+    public String generateToken(UserDB userDB) {
         Map<String, Object> claims = new HashMap<>();
-        return createToken(claims, userDetails.getUsername());
+
+        claims.put("id", userDB.getId());
+        claims.put("phone_number", userDB.getPhone_number());
+        claims.put("email", userDB.getEmail());
+        claims.put("role",userDB.getRole());
+
+        return createToken(claims, userDB.getUsername());
     }
 
     private String createToken(Map<String, Object> claims, String subject) {
@@ -41,9 +48,9 @@ public class JWTUtils {
                 .compact();
     }
 
-    public Boolean validateToken(String token, UserDetails userDetails) {
+    public Boolean validateToken(String token, UserDB userDB) {
         final String username = extractUsername(token);
-        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+        return (username.equals(userDB.getUsername()) && !isTokenExpired(token));
     }
 
     public String extractUsername(String token) {
@@ -52,6 +59,26 @@ public class JWTUtils {
 
     public Date extractExpiration(String token) {
         return extractClaim(token, Claims::getExpiration);
+    }
+
+    public Long extractUserId(String token) {
+        Claims claims = extractAllClaims(token);
+        return claims.get("id", Long.class);
+    }
+
+    public String extractUserPhoneNumber(String token) {
+        Claims claims = extractAllClaims(token);
+        return claims.get("phone_number", String.class);
+    }
+
+    public String extractUserEmail(String token) {
+        Claims claims = extractAllClaims(token);
+        return claims.get("email", String.class);
+    }
+
+    public String extractUserRole(String token) {
+        Claims claims = extractAllClaims(token);
+        return claims.get("role", String.class);
     }
 
     private <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {

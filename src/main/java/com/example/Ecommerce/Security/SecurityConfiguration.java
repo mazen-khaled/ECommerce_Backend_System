@@ -49,7 +49,11 @@ public class SecurityConfiguration {
                         )
                         .hasRole("MANAGER")
 
-                        .anyRequest().authenticated()
+                        .requestMatchers(
+                                "/api/users/get-user-by-id/**"
+                        ).authenticated() // required authentication header and theis authentication handled in controller
+
+                        .anyRequest().authenticated() // Any other request must send authentication header (JWT Token) and i will check inside the controller
                 )
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

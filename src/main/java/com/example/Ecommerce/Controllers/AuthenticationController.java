@@ -25,8 +25,8 @@ public class AuthenticationController {
     public ResponseEntity<String> login(@RequestBody UserDB user) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
-        final UserDB userDetails = authenticationServices.loadUserByUsername(user.getUsername());
-        final String token = jwtUtils.generateToken(userDetails);
+        final UserDB userDB = authenticationServices.loadUserByUsername(user.getUsername());
+        final String token = jwtUtils.generateToken(userDB);
         return ResponseEntity.ok(token);
     }
 }
