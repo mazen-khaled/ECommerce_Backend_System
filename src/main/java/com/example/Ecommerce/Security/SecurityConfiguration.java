@@ -40,20 +40,18 @@ public class SecurityConfiguration {
                         .permitAll()
 
                         .requestMatchers(
-                                "/api/users/get-all-users"
+                                "/api/users/get-all-customers"
                         )
                         .hasAnyRole("ADMIN", "MANAGER")
 
                         .requestMatchers(
-                                "/api/users/register-new-admin"
+                                "/api/users/register-new-admin",
+                                "/api/users/get-all-admins",
+                                "/api/users/get-all-users"
                         )
                         .hasRole("MANAGER")
 
-                        .requestMatchers(
-                                "/api/users/get-user-by-id/**"
-                        ).authenticated() // required authentication header and theis authentication handled in controller
-
-                        .anyRequest().authenticated() // Any other request must send authentication header (JWT Token) and i will check inside the controller
+                        .anyRequest().authenticated() // Any other request must send authentication header (JWT Token) and I will check inside the controller
                 )
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

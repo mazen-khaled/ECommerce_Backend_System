@@ -7,6 +7,7 @@ import com.example.Ecommerce.Services.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,33 +22,39 @@ public class UserController {
     private JWTUtils jwtUtils;
 
     @PostMapping("/register-new-customer")
-    public UserDB createUser(@RequestBody UserDB user) {
-        user.setRole(Role.ROLE_CUSTOMER);
-        return userServices.createUser(user);
+    public UserDB createCustomer(@RequestBody UserDB customer) {
+        customer.setRole(Role.ROLE_CUSTOMER);
+        return userServices.createUser(customer);
     }
 
     @PostMapping("/register-new-admin")
-    public UserDB createAdmin(@RequestBody UserDB user) {
-        user.setRole(Role.ROLE_ADMIN);
-        return userServices.createUser(user);
+    @PreAuthorize("hasRole('MANAGER')")
+    public UserDB createAdmin(@RequestBody UserDB admin) {
+        admin.setRole(Role.ROLE_ADMIN);
+        return userServices.createUser(admin);
     }
 
+    @PreAuthorize("hasRole('MANAGER')")
     @GetMapping("/get-all-users")
     public List<UserDB> getAllUsers() {
         return userServices.getAllUsers();
     }
 
-    @GetMapping("/admins")
+    @PreAuthorize("hasAnyRole('MANAGER','ADMIN')")
+    @GetMapping("/get-all-customers")
+    public List<UserDB> getAllCustomers() {
+        return userServices.getAllCustomers();
+    }
+
+    @GetMapping("/get-all-admins")
+    @PreAuthorize("hasRole('MANAGER')")
     public List<UserDB> getAllAdmins() {
         return userServices.getAllAdmins();
     }
 
     @GetMapping("/get-user-by-id/{id}")
     public ResponseEntity<?> getUserById(@PathVariable Long id, @RequestHeader("Authorization") String token) {
-        Long currentUserId = jwtUtils.extractUserId(token.replace("Bearer ", ""));
-        String currentUserRole = jwtUtils.extractUserRole(token.replace("Bearer ", ""));
-
-        if (!currentUserId.equals(id) && !currentUserRole.equals("ROLE_MANAGER")) {
+        if(!idOrMAAreCorrect(id, token)){
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("You are not authorized to access this resource");
         }
         if (userServices.getUserById(id).isPresent()) {
@@ -87,4 +94,50 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null); // Return 404 Not Found
         }
     }
+
+    @PutMapping("/update-user-data-by-id/{id}")
+    public ResponseEntity<?> updateUserData(@RequestBody UserDB updatedUser, @RequestHeader("Authorization") String token, @PathVariable Long id){
+        if(!idOrMangerAreCorrect(id, token)){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("You are not authorized to access this resource");
+        }
+        if (updatedUser == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User data cannot be null");
+        }
+        return userServices.updateUserById(updatedUser);
+    }
+
+    @DeleteMapping("/delete-user-data-by-id/{id}")
+    public ResponseEntity<?> deleteUserById(@RequestHeader("Authorization") String token, @PathVariable Long id){
+        String currentUserRole = jwtUtils.extractUserRole(token.replace("Bearer ", ""));
+        if(currentUserRole.matches("ROLE_ADMIN") && (userServices.getUserById(id).get().getRole().name().matches("ROLE_ADMIN") || userServices.getUserById(id).get().getRole().name().matches("ROLE_MANAGER"))){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("You are not authorized delete Admins or Mangers");
+        }
+        if(!idOrMAAreCorrect(id, token)){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("You are not authorized to access this resource");
+        }
+        if (id == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User data cannot be null");
+        }
+        return userServices.deleteUserById(id);
+    }
+
+    private Boolean idOrMangerAreCorrect(Long id, String token){
+        Long currentUserId = jwtUtils.extractUserId(token.replace("Bearer ", ""));
+        String currentUserRole = jwtUtils.extractUserRole(token.replace("Bearer ", ""));
+
+        if (!currentUserId.equals(id) && !currentUserRole.equals("ROLE_MANAGER")) {
+            return Boolean.FALSE;
+        }
+        return Boolean.TRUE;
+    }
+    private Boolean idOrMAAreCorrect(Long id, String token){
+        Long currentUserId = jwtUtils.extractUserId(token.replace("Bearer ", ""));
+        String currentUserRole = jwtUtils.extractUserRole(token.replace("Bearer ", ""));
+
+        if (!currentUserId.equals(id) && !currentUserRole.equals("ROLE_MANAGER") && !currentUserRole.equals("ROLE_ADMIN")) {
+            return Boolean.FALSE;
+        }
+        return Boolean.TRUE;
+    }
+
 }
