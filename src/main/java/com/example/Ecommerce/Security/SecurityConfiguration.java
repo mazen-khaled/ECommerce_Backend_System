@@ -12,12 +12,21 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfiguration {
+public class SecurityConfiguration implements WebMvcConfigurer{
     @Autowired
     private JWTFilter jwtFilter;
+
+    @Override
+    public void addCorsMappings (CorsRegistry registry){
+        registry.addMapping("/**")
+                .allowedOrigins("*")
+                .allowedMethods("*");
+    }
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
@@ -51,7 +60,7 @@ public class SecurityConfiguration {
                         )
                         .hasRole("MANAGER")
 
-                        .anyRequest().authenticated() // Any other request must send authentication header (JWT Token) and I will check inside the controller
+                        .anyRequest().authenticated() // Any other request must send authentication header (JWT Token)
                 )
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
