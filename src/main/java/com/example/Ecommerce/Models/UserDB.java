@@ -1,8 +1,11 @@
-package com.example.Ecommerce.Enities;
+package com.example.Ecommerce.Models;
 
 import com.example.Ecommerce.DataStructures.Role;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
+
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,6 +14,7 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
+@Builder
 @Entity
 @Data
 @Table(name = "users")
@@ -39,7 +43,10 @@ public class UserDB implements UserDetails {
 
     private String address;
     private String user_image_url;
-    private LocalDateTime account_created_ats = LocalDateTime.now();
+
+    @Column(nullable = false, updatable = false)
+    @CreationTimestamp
+    private LocalDateTime account_created_ats;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

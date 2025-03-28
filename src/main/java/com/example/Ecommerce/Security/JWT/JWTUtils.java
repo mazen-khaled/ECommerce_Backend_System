@@ -1,11 +1,12 @@
-package com.example.Ecommerce.JWT;
+package com.example.Ecommerce.Security.JWT;
 
-import com.example.Ecommerce.Enities.UserDB;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+
+import com.example.Ecommerce.Models.UserDB;
 
 import javax.crypto.SecretKey;
 import java.security.Key;

@@ -1,6 +1,6 @@
-package com.example.Ecommerce.JWT;
+package com.example.Ecommerce.Security.JWT;
 
-import com.example.Ecommerce.Enities.UserDB;
+import com.example.Ecommerce.Models.UserDB;
 import com.example.Ecommerce.Services.AuthenticationServices;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

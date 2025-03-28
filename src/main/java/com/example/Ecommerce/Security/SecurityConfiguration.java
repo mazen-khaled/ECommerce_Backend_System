@@ -1,6 +1,5 @@
 package com.example.Ecommerce.Security;
 
-import com.example.Ecommerce.JWT.JWTFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +13,8 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import com.example.Ecommerce.Security.JWT.JWTFilter;
 
 @Configuration
 @EnableWebSecurity

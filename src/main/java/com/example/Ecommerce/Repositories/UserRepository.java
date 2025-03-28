@@ -1,7 +1,8 @@
 package com.example.Ecommerce.Repositories;
 
 import com.example.Ecommerce.DataStructures.Role;
-import com.example.Ecommerce.Enities.UserDB;
+import com.example.Ecommerce.Models.UserDB;
+
 import jakarta.validation.constraints.NotNull;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

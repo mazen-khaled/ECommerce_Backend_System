@@ -1,7 +1,9 @@
 package com.example.Ecommerce.Controllers;
 
-import com.example.Ecommerce.Enities.UserDB;
-import com.example.Ecommerce.JWT.JWTUtils;
+import com.example.Ecommerce.DTOs.Request.LoginRequest;
+import com.example.Ecommerce.DTOs.Response.LoginResponse;
+import com.example.Ecommerce.Models.UserDB;
+import com.example.Ecommerce.Security.JWT.JWTUtils;
 import com.example.Ecommerce.Services.AuthenticationServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,11 +24,19 @@ public class AuthenticationController {
     private JWTUtils jwtUtils;
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody UserDB user) {
+    public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
         authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
-        final UserDB userDB = authenticationServices.loadUserByUsername(user.getUsername());
-        final String token = jwtUtils.generateToken(userDB);
-        return ResponseEntity.ok(token);
+                new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+        final UserDB userDB = authenticationServices.loadUserByUsername(loginRequest.getUsername());
+        
+        String token = jwtUtils.generateToken(userDB);
+
+        final LoginResponse loginResponse = LoginResponse.builder()
+                            .token(token)
+                            .id(userDB.getId())
+                            .role(userDB.getRole().name())
+                            .build();
+
+        return ResponseEntity.ok(loginResponse);
     }
 }

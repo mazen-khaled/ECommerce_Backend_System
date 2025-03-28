@@ -1,5 +1,5 @@
 package com.example.Ecommerce.Services;
-import com.example.Ecommerce.Enities.UserDB;
+import com.example.Ecommerce.Models.UserDB;
 import com.example.Ecommerce.Repositories.AuthenticationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;

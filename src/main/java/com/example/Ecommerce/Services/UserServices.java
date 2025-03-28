@@ -1,7 +1,7 @@
 package com.example.Ecommerce.Services;
 
 import com.example.Ecommerce.DataStructures.Role;
-import com.example.Ecommerce.Enities.UserDB;
+import com.example.Ecommerce.Models.UserDB;
 import com.example.Ecommerce.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
