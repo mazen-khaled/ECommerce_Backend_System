@@ -2,8 +2,10 @@ package com.example.Ecommerce.Models;
 
 import com.example.Ecommerce.DataStructures.Role;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.security.core.GrantedAuthority;
@@ -15,6 +17,8 @@ import java.util.Collection;
 import java.util.List;
 
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Data
 @Table(name = "users")

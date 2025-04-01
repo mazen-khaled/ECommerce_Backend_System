@@ -1,6 +1,9 @@
 package com.example.Ecommerce.Services;
 import com.example.Ecommerce.Models.UserDB;
 import com.example.Ecommerce.Repositories.AuthenticationRepository;
+
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -14,8 +17,10 @@ public class AuthenticationServices implements UserDetailsService {
 
     // Security logic method
     @Override
-    public UserDB loadUserByUsername(String username) throws UsernameNotFoundException {
-        return authenticationRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + username));
+    public UserDB loadUserByUsername(String email) throws UsernameNotFoundException {
+        Optional<UserDB> userOpt = authenticationRepository.findByEmail(email);
+        return userOpt.orElseThrow(() -> {
+            return new UsernameNotFoundException("User Email not found with email: " + email);
+        });
     }
 }

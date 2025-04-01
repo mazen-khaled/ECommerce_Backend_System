@@ -10,8 +10,8 @@ html, body {
     width: 100%;
     height: 100%;
     font-family: 'Poppins', sans-serif;
-    background-color: #171717;
-    color: #E0E0E0;
+    background: linear-gradient(145deg, #0A1A2F 0%, #1A0E2B 100%);
+    color: #E5E4E2;
     overflow: hidden;
 }
 
@@ -22,7 +22,7 @@ html, body {
     width: 100%;
     height: 100%;
     display: flex;
-    background-color: #001C12;
+    background-color: #0A1A2F;
     animation: fadeIn 0.8s ease-out;
 }
 
@@ -30,7 +30,7 @@ html, body {
     position: relative;
     width: 40%;
     height: 100%;
-    background: linear-gradient(135deg, rgba(0, 28, 18, 0.9), rgba(0, 28, 18, 0.7)), 
+    background: linear-gradient(135deg, rgba(10, 26, 47, 0.9), rgba(26, 14, 43, 0.7)), 
     url('../resources/signup.avif') no-repeat center center;
     background-size: cover;
     display: flex;
@@ -55,7 +55,7 @@ html, body {
 .welcome-text {
     text-align: center;
     margin-top: 1.5rem;
-    color: #E0E0E0;
+    color: #E5E4E2;
     width: 90%;
 }
 
@@ -64,7 +64,7 @@ html, body {
     font-size: 1.6rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
-    color: #FFD700;
+    color: #D4AF37;
 }
 
 .welcome-text p {
@@ -92,15 +92,15 @@ h2 {
     font-family: 'Playfair Display', serif;
     font-size: 2rem;
     font-weight: 700;
-    color: #FFD700;
+    color: #D4AF37;
     margin-bottom: 0.5rem;
-    background: linear-gradient(to right, #D4AF37, #FFD700);
+    background: linear-gradient(to right, #D4AF37, #F5D072);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
 .subtitle {
-    color: #E0E0E0;
+    color: #E5E4E2;
     margin-bottom: 1.5rem;
     font-size: 0.85rem;
     line-height: 1.4;
@@ -133,10 +133,10 @@ h2 {
 .input-group textarea {
     width: 100%;
     padding: 12px 12px 12px 38px;
-    background-color: rgba(23, 23, 23, 0.7);
+    background-color: rgba(10, 26, 47, 0.7);
     border: 1px solid rgba(212, 175, 55, 0.3);
     border-radius: 5px;
-    color: #E0E0E0;
+    color: #E5E4E2;
     font-size: 0.85rem;
     transition: all 0.2s ease;
     font-family: 'Poppins', sans-serif;
@@ -159,7 +159,7 @@ h2 {
     position: absolute;
     left: 38px;
     top: 12px;
-    color: #E0E0E0;
+    color: #E5E4E2;
     font-size: 0.85rem;
     pointer-events: none;
     transition: all 0.2s ease;
@@ -172,7 +172,7 @@ h2 {
     top: -8px;
     left: 30px;
     font-size: 0.65rem;
-    background-color: #001C12;
+    background-color: #0A1A2F;
     padding: 0 4px;
     color: #D4AF37;
 }
@@ -180,7 +180,7 @@ h2 {
 .password-strength {
     height: 2px;
     width: 0;
-    background-color: #DC143C;
+    background-color: #5E0E1C;
     position: absolute;
     bottom: 0;
     left: 0;
@@ -206,7 +206,7 @@ h2 {
     display: inline-block;
     width: 14px;
     height: 14px;
-    background-color: rgba(23, 23, 23, 0.7);
+    background-color: rgba(10, 26, 47, 0.7);
     border: 1px solid #D4AF37;
     border-radius: 3px;
     margin-right: 6px;
@@ -224,7 +224,7 @@ h2 {
     top: 1px;
     width: 3px;
     height: 6px;
-    border: solid #001C12;
+    border: solid #0A1A2F;
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
 }
@@ -236,17 +236,17 @@ h2 {
 }
 
 .checkbox-container a:hover {
-    color: #FFD700;
+    color: #F5D072;
     text-decoration: underline;
 }
 
 .btn-signup {
     width: 100%;
     padding: 10px;
-    background: linear-gradient(135deg, #D4AF37, #FFD700);
+    background: linear-gradient(135deg, #D4AF37, #F5D072);
     border: none;
     border-radius: 5px;
-    color: #001C12;
+    color: #0A1A2F;
     font-weight: 600;
     font-size: 0.85rem;
     cursor: pointer;
@@ -255,7 +255,7 @@ h2 {
 }
 
 .btn-signup:hover {
-    background: linear-gradient(135deg, #FFD700, #D4AF37);
+    background: linear-gradient(135deg, #F5D072, #D4AF37);
     transform: translateY(-1px);
     box-shadow: 0 3px 10px rgba(212, 175, 55, 0.3);
 }
@@ -263,7 +263,7 @@ h2 {
 .login-link {
     text-align: center;
     font-size: 0.75rem;
-    color: #E0E0E0;
+    color: #E5E4E2;
     margin-top: 0.5rem;
 }
 
@@ -275,7 +275,7 @@ h2 {
 }
 
 .login-link a:hover {
-    color: #FFD700;
+    color: #F5D072;
     text-decoration: underline;
 }
 
@@ -285,16 +285,16 @@ h2 {
 }
 
 .form-container::-webkit-scrollbar-track {
-    background: rgba(23, 23, 23, 0.3);
+    background: rgba(10, 26, 47, 0.3);
 }
 
 .form-container::-webkit-scrollbar-thumb {
-    background-color: #D4AF37;
+    background-color: #4A1C6F;
     border-radius: 3px;
 }
 
 .form-container::-webkit-scrollbar-thumb:hover {
-    background-color: #FFD700;
+    background-color: #5E0E1C;
 }
 
 /* Animations */
