@@ -32,10 +32,9 @@ public class JWTUtils {
 
         claims.put("id", userDB.getId());
         claims.put("phone_number", userDB.getPhone_number());
-        claims.put("email", userDB.getEmail());
         claims.put("role",userDB.getRole());
 
-        return createToken(claims, userDB.getUsername());
+        return createToken(claims, userDB.getEmail());
     }
 
     private String createToken(Map<String, Object> claims, String subject) {
@@ -49,11 +48,11 @@ public class JWTUtils {
     }
 
     public Boolean validateToken(String token, UserDB userDB) {
-        final String username = extractUsername(token);
-        return (username.equals(userDB.getUsername()) && !isTokenExpired(token));
+        final String email = extractEmail(token);
+        return (email.equals(userDB.getEmail()) && !isTokenExpired(token));
     }
 
-    public String extractUsername(String token) {
+    public String extractEmail(String token) {
         return extractClaim(token, Claims::getSubject);
     }
 
@@ -69,11 +68,6 @@ public class JWTUtils {
     public String extractUserPhoneNumber(String token) {
         Claims claims = extractAllClaims(token);
         return claims.get("phone_number", String.class);
-    }
-
-    public String extractUserEmail(String token) {
-        Claims claims = extractAllClaims(token);
-        return claims.get("email", String.class);
     }
 
     public String extractUserRole(String token) {

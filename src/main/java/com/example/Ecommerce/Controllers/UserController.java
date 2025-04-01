@@ -84,7 +84,7 @@ public class UserController {
 
     @GetMapping("/get-user-by-email/{email}")
     public ResponseEntity<?> getUserByEmail(@PathVariable String email, @RequestHeader("Authorization") String token) {
-        String currentUserEmail = jwtUtils.extractUserEmail(token.replace("Bearer ", ""));
+        String currentUserEmail = jwtUtils.extractEmail(token.replace("Bearer ", ""));
         String currentUserRole = jwtUtils.extractUserRole(token.replace("Bearer ", ""));
 
         if (!currentUserEmail.equals(email) && !currentUserRole.equals("ROLE_MANAGER")) {

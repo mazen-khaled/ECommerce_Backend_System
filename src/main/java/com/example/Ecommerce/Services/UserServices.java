@@ -73,10 +73,6 @@ public class UserServices {
         }
 
         UserDB userToUpdate = existingUser.get();
-
-        if (updatedUser.getUsername() != null) {
-            userToUpdate.setUsername(updatedUser.getUsername());
-        }
         if (updatedUser.getPassword() != null) {
             userToUpdate.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
         }
