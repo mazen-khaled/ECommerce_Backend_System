@@ -83,7 +83,6 @@ h2 {
     color: #D4AF37;
     margin-bottom: 0.5rem;
     background: linear-gradient(to right, #D4AF37, #F5D072);
-    -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
@@ -211,7 +210,7 @@ h2 {
     font-size: 0.9rem;
     cursor: pointer;
     transition: all 0.3s ease;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.4rem;
 }
 
 .btn-login:hover {
@@ -225,6 +224,12 @@ h2 {
     flex-direction: column;
     gap: 0.8rem;
     margin-bottom: 1.5rem;
+}
+
+.try-again{
+    color: #ff002b;
+    text-align: center;
+    font-size: 0.8rem;
 }
 
 .btn-social {
