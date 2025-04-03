@@ -39,12 +39,6 @@
                 </div>
                 
                 <div class="input-group">
-                    <input type="text" id="username" name="username" required>
-                    <label for="username">Username</label>
-                    <i class="fas fa-at"></i>
-                </div>
-                
-                <div class="input-group">
                     <input type="email" id="email" name="email" required>
                     <label for="email">Email</label>
                     <i class="fas fa-envelope"></i>
@@ -62,25 +56,43 @@
                     <i class="fas fa-lock"></i>
                     <div class="password-strength"></div>
                 </div>
+                <div class="password-requirements" style="display: none;">
+                    <p>Password must contain:</p>
+                    <ul>
+                        <li class="req-length"><i class="fas fa-circle"></i> <span>At least 5 characters</span></li>
+                        <li class="req-lowercase"><i class="fas fa-circle"></i> <span>Lowercase letters</span></li>
+                        <li class="req-uppercase"><i class="fas fa-circle"></i> <span>Uppercase letters</span></li>
+                        <li class="req-number"><i class="fas fa-circle"></i> <span>Numbers</span></li>
+                        <li class="req-special"><i class="fas fa-circle"></i> <span>Special characters</span></li>
+                    </ul>
+                    <div class="strength-level">
+                        <span>Strength: </span>
+                        <span class="level">None</span>
+                    </div>
+                </div>
                 
                 <div class="input-group">
                     <input type="password" id="confirmPassword" name="confirmPassword" required>
                     <label for="confirmPassword">Confirm Password</label>
                     <i class="fas fa-lock"></i>
                 </div>
+                <div id="password-match-indicator"></div>
                 
-                <div class="input-group">
-                    <input type="address" id="address" name="address" required>
+                <div class="input-group optional">
+                    <input type="address" id="address" name="address" placeholder="Address">
                     <label for="address">Address</label>
                     <i class="fas fa-home"></i>
                 </div>
                 
                 <div class="terms">
                     <label class="checkbox-container">
-                        <input type="checkbox" name="terms" required>
+                        <input type="checkbox" id="termsCheckbox" name="terms" required>
                         <span class="checkmark"></span>
-                        I agree to the <a href="#">&nbspTerms & Conditions</a>&nbspand&nbsp<a href="#">Privacy Policy</a>
+                        I agree to the <a href="#">&nbspTerms & Conditions&nbsp</a> and <a href="#">&nbspPrivacy Policy</a>
                     </label>
+                    <span class="terms-error" style="display: none; color: #ff002b; margin-top: 5px; font-size: 0.8em;">
+                        &nbsp You must agree to the terms and conditions
+                    </span>
                 </div>
                 
                 <button type="submit" class="btn-signup">Create Account</button>

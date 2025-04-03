@@ -297,6 +297,92 @@ h2 {
     background-color: #5E0E1C;
 }
 
+.input-group.optional label::after {
+    content: " (Optional)";
+    color: #999;
+    font-size: 0.9em;
+}
+
+.password-requirements {
+    margin-top: -20px;
+    padding: 10px;
+    background-color: rgba(10, 26, 47, 0.5);
+    border-radius: 5px;
+    font-size: 0.75rem;
+}
+
+.password-requirements p {
+    margin-bottom: 5px;
+    color: #E5E4E2;
+}
+
+.password-requirements ul {
+    list-style: none;
+    margin-left: 5px;
+}
+
+.password-requirements li {
+    margin-bottom: 3px;
+    display: flex;
+    align-items: center;
+}
+
+.password-requirements i {
+    font-size: 0.4rem;
+    margin-right: 8px;
+    color: #5E0E1C;
+}
+
+.password-requirements .valid i {
+    color: #5cb85c;
+}
+
+.strength-level {
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.strength-level .level {
+    margin-left: 5px;
+    font-weight: 600;
+}
+
+.level-easy {
+    color: #ff6b6b;
+}
+
+.level-medium {
+    color: #1b95c3;
+}
+
+.level-hard {
+    color: #5cb85c;
+}
+
+#password-match-indicator{
+    font-size: 1.4rem;
+    margin-top: -22px;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 0.75rem;
+}
+
+.password-match {
+    margin-top: 5px;
+    font-size: 0.8em;
+    display: none;
+}
+
+/* Style for password inputs based on match state */
+#confirmPassword.match {
+    border-color: #5cb85c !important;
+}
+
+#confirmPassword.mismatch {
+    border-color: #ff002b !important;
+}
+
 /* Animations */
 @keyframes fadeIn {
     from {

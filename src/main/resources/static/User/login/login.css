@@ -83,6 +83,7 @@ h2 {
     color: #D4AF37;
     margin-bottom: 0.5rem;
     background: linear-gradient(to right, #D4AF37, #F5D072);
+    -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 

@@ -1,15 +1,14 @@
 document.addEventListener('DOMContentLoaded', async function() {
-    // Check for role cookie
     const role = getCookie('role');
-    
-    if (!role) {
-        // Redirect to login if no role cookie
-        window.location.href = '../login/login.html';
+    console.log("Should redirect?", role !== "ROLE_USER"); // Should log `true`
+
+    if (role !== "ROLE_USER") {  // Cleaner condition (no extra parentheses)
+        window.location.href = '../login/login.html?fromUserProfile=true';
         return;
     }
     
-    console.log('User role:', role);
-    // Load profile data based on role
+    console.log('User sdrole:', role);
+    // Rest of your profile loading logic
 });
 
 function getCookie(name) {

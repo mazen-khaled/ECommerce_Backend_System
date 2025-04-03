@@ -21,8 +21,8 @@ public class UserServices {
     private PasswordEncoder passwordEncoder;
 
     public UserDB createUser(UserDB user) {
-        if (user.getUsername() == null || user.getUsername().trim().isEmpty()) {
-            throw new IllegalArgumentException("Username can't be empty");
+        if (user.getEmail() == null || user.getEmail().trim().isEmpty()) {
+            throw new IllegalArgumentException("Email can't be empty");
         }
         if (user.getPassword() == null || user.getPassword().trim().isEmpty()) {
             throw new IllegalArgumentException("Password can't be empty");
@@ -33,8 +33,8 @@ public class UserServices {
         if (user.getPhone_number() == null || user.getPhone_number().trim().isEmpty()) {
             throw new IllegalArgumentException("Phone Number can't be empty");
         }
-        if (user.getEmail() == null || user.getEmail().trim().isEmpty()) {
-            throw new IllegalArgumentException("Email can't be empty");
+        if (user.getTerms() == null) {
+            throw new IllegalArgumentException("Terms can't be empty");
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);

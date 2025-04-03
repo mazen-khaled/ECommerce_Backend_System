@@ -1,3 +1,16 @@
+document.addEventListener('DOMContentLoaded', function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const fromProfile = urlParams.get('fromUserProfile');
+    
+    if (fromProfile === 'true') {
+        const tryAgainMsg = document.querySelector('.try-again');
+        if (tryAgainMsg) {
+            tryAgainMsg.textContent = "You are not allowed here 🤨"
+            tryAgainMsg.style.display = 'block';
+        }
+    }
+});
+
 document.getElementById('btn-login').addEventListener('click', async function(e) {
     e.preventDefault();
 

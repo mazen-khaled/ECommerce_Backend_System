@@ -42,6 +42,9 @@ public class UserDB implements UserDetails {
     @Column(unique = true, nullable = false)
     private String phone_number;
 
+    @Column(nullable = false)
+    private Boolean terms;
+
     private String address;
     private String user_image_url;
 
