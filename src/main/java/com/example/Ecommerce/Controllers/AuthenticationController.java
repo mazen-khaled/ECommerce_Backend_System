@@ -4,13 +4,17 @@ import com.example.Ecommerce.DTOs.Request.LoginRequest;
 import com.example.Ecommerce.Models.UserDB;
 import com.example.Ecommerce.Security.JWT.JWTUtils;
 import com.example.Ecommerce.Services.AuthenticationServices;
+import com.example.Ecommerce.Services.OtpServices;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.util.concurrent.TimeUnit;
 
+import javax.mail.MessagingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -28,6 +32,30 @@ public class AuthenticationController {
 
     @Autowired
     private JWTUtils jwtUtils;
+
+    @Autowired
+    private OtpServices otpServices;
+    
+    @PostMapping("/send-otp")
+    public ResponseEntity<?> sendOtp(@RequestParam String email) {
+        try {
+            otpServices.generateAndSendOtp(email);
+            return ResponseEntity.ok("OTP sent successfully");
+        } catch (MessagingException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body("Failed to send OTP");
+        }
+    }
+
+    @PostMapping("/verify-otp")
+    public ResponseEntity<?> verifyOtp(@RequestParam String email, @RequestParam String otp) {
+        boolean isValid = otpServices.validateOtp(email, otp);
+        if (isValid) {
+            return ResponseEntity.ok("OTP verified successfully");
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid or expired OTP");
+        }
+    }
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest, HttpServletResponse response) {
