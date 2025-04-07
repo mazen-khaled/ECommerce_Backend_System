@@ -24,9 +24,9 @@ public class UserController {
     private JWTUtils jwtUtils;
 
     @PostMapping("/register-new-customer")
-    public ResponseEntity<UserDB> createCustomer(@RequestBody UserDB customer) {
+    public ResponseEntity<?> createCustomer(@RequestBody UserDB customer) {
         customer.setRole(Role.ROLE_CUSTOMER);
-        return ResponseEntity.ok(userServices.createUser(customer));
+        return ResponseEntity.ok("User Added Successfully");
     }
 
     @PostMapping("/register-new-admin")

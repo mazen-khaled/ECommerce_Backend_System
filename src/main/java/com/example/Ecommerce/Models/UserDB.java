@@ -27,30 +27,31 @@ public class UserDB implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true, nullable = false)
+    private String email;
+
+    @Column(nullable = false)
+    private String name;
+
     @Column(nullable = false)
     private String password;
 
     @Column(nullable = false)
     private Role role;
 
-    @Column(nullable = false)
-    private String name;
-
-    @Column(unique = true, nullable = false)
-    private String email;
-
-    @Column(unique = true, nullable = false)
+    @Column(unique = true)
     private String phone_number;
 
     @Column(nullable = false)
     private Boolean terms;
 
-    private String address;
-    private String user_image_url;
-
     @Column(nullable = false, updatable = false)
     @CreationTimestamp
     private LocalDateTime account_created_ats;
+
+    private List<String> wishList;
+    private String address;
+    private String user_image_url;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

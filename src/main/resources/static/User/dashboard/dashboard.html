@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regalith | Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="../resources/favicon_32x32.ico">
+</head>
+<body>
+    
+    <div class="dashboard-container">
+        <!-- Static Sidebar Navigation -->
+        <aside class="sidebar">
+            <button class="sidebar-close">&times;</button>
+            <div class="sidebar-header">
+                <img src="../resources/Logo.png" alt="Regalith Logo" class="logo">
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="active">
+                        <a href="#">
+                            <i class="fas fa-home"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../main/main.html">
+                            <i class="fas fa-store"></i>
+                            <span>Store</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-tshirt"></i>
+                            <span>My Wardrobe</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-heart"></i>
+                            <span>Wishlist</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-shopping-bag"></i>
+                            <span>Orders</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Appointments</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-cog"></i>
+                            <span>Settings</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <img src="https://via.placeholder.com/50" alt="User" class="user-avatar">
+                    <div class="user-info">
+                        <h4 class="user-name">Alex Morgan</h4>
+                        <p>Premium Member</p>
+                    </div>
+                    <a href="../login/login.html" class="logout-btn">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </a>
+                </div>
+            </div>
+        </aside>
+        <div class="sidebar-overlay"></div>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="main-header">
+                <div class="header-left">
+                    <button class="menu-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h2>Welcome Back, <span class="user-name">Alex</span></h2>
+                </div>
+                <div class="header-right">
+                    <div class="search-bar">
+                        <input type="text" placeholder="Search...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">0</span>
+                    </div>
+                </div>
+            </header>
+            
+            <div class="content-wrapper">
+                <!-- Static Stats Cards Structure -->
+                <div class="stats-grid">
+                    <div class="stat-card" style="--card-color: var(--accent)">
+                        <div class="stat-icon">
+                            <i class="fas fa-tshirt"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 class="wardrobe-count">0</h3>
+                            <p>Items in Wardrobe</p>
+                        </div>
+                        <div class="stat-bg"></div>
+                    </div>
+                    
+                    <div class="stat-card" style="--card-color: var(--light-accent)">
+                        <div class="stat-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 class="wishlist-count">0</h3>
+                            <p>Wishlist Items</p>
+                        </div>
+                        <div class="stat-bg"></div>
+                    </div>
+                    
+                    <div class="stat-card" style="--card-color: var(--mid-accent)">
+                        <div class="stat-icon">
+                            <i class="fas fa-shopping-bag"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 class="orders-count">0</h3>
+                            <p>Recent Orders</p>
+                        </div>
+                        <div class="stat-bg"></div>
+                    </div>
+                    
+                    <div class="stat-card" style="--card-color: var(--secondary)">
+                        <div class="stat-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 class="fittings-count">0</h3>
+                            <p>Upcoming Fittings</p>
+                        </div>
+                        <div class="stat-bg"></div>
+                    </div>
+                </div>
+                
+                <!-- Dynamic Content Sections -->
+                <div class="section">
+                    <div class="section-header">
+                        <h3>Recent Orders</h3>
+                        <a href="#" class="view-all">View All</a>
+                    </div>
+                    <div class="orders-grid"></div>
+                </div>
+                
+                <div class="section">
+                    <div class="section-header">
+                        <h3>Suggestions</h3>
+                        <a href="#" class="view-all">View All</a>
+                    </div>
+                    <div class="suggestions-grid"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="dashboard.js"></script>
+</body>
+</html>
