@@ -3,172 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Regalith | Dashboard</title>
+    <title>Regalith | My Dashboard</title>
     <link rel="stylesheet" href="dashboard.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" type="image/x-icon" href="../resources/favicon_32x32.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-<body>
-    
-    <div class="dashboard-container">
-        <!-- Static Sidebar Navigation -->
-        <aside class="sidebar">
-            <button class="sidebar-close">&times;</button>
-            <div class="sidebar-header">
-                <img src="../resources/Logo.png" alt="Regalith Logo" class="logo">
+<body class="light-theme">
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo-container">
+                <img src="../resources/logo-light.png" alt="Regalith Logo" class="logo">
             </div>
-            
-            <nav class="sidebar-nav">
-                <ul>
-                    <li class="active">
-                        <a href="#">
-                            <i class="fas fa-home"></i>
-                            <span>Dashboard</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="../main/main.html">
-                            <i class="fas fa-store"></i>
-                            <span>Store</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fas fa-tshirt"></i>
-                            <span>My Wardrobe</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fas fa-heart"></i>
-                            <span>Wishlist</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fas fa-shopping-bag"></i>
-                            <span>Orders</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fas fa-calendar-alt"></i>
-                            <span>Appointments</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fas fa-cog"></i>
-                            <span>Settings</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-            
-            <div class="sidebar-footer">
-                <div class="user-profile">
-                    <img src="https://via.placeholder.com/50" alt="User" class="user-avatar">
-                    <div class="user-info">
-                        <h4 class="user-name">Alex Morgan</h4>
-                        <p>Premium Member</p>
-                    </div>
-                    <a href="../login/login.html" class="logout-btn">
-                        <i class="fas fa-sign-out-alt"></i>
-                    </a>
-                </div>
-            </div>
-        </aside>
-        <div class="sidebar-overlay"></div>
-        
-        <!-- Main Content -->
-        <main class="main-content">
-            <header class="main-header">
-                <div class="header-left">
-                    <button class="menu-toggle">
-                        <i class="fas fa-bars"></i>
+            <ul class="nav-links">
+                <li><a href="../main/main.html"><i class="fas fa-store"></i> Shop</a></li>
+                <li class="cart-item">
+                    <a href="../cart/cart.html"><i class="fas fa-shopping-cart"></i> Cart <span class="cart-count">0</span></a>
+                </li>
+                <li><a href="#footer"><i class="fas fa-envelope"></i> Contact</a></li>
+                <li>
+                    <button class="theme-toggle" aria-label="Toggle theme">
+                        <i class="fas fa-moon"></i>
                     </button>
-                    <h2>Welcome Back, <span class="user-name">Alex</span></h2>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="dashboard-container">
+        <div class="dashboard-header">
+            <h1>Welcome Back, <span id="userName"></span></h1>
+            <p class="slogan">Elegance, Carved in Time</p>
+        </div>
+
+        <div class="dashboard-grid">
+            <!-- User Profile Section -->
+            <section class="dashboard-card profile-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-user-circle"></i> My Profile</h2>
+                    <button class="edit-btn" id="editProfileBtn"><i class="fas fa-edit"></i> Edit</button>
                 </div>
-                <div class="header-right">
-                    <div class="search-bar">
-                        <input type="text" placeholder="Search...">
-                        <i class="fas fa-search"></i>
-                    </div>
-                    <div class="notifications">
-                        <i class="fas fa-bell"></i>
-                        <span class="notification-badge">0</span>
-                    </div>
+                <div class="profile-info" id="profileInfo">
+                    <!-- Filled by JavaScript -->
                 </div>
-            </header>
-            
-            <div class="content-wrapper">
-                <!-- Static Stats Cards Structure -->
-                <div class="stats-grid">
-                    <div class="stat-card" style="--card-color: var(--accent)">
-                        <div class="stat-icon">
-                            <i class="fas fa-tshirt"></i>
-                        </div>
-                        <div class="stat-info">
-                            <h3 class="wardrobe-count">0</h3>
-                            <p>Items in Wardrobe</p>
-                        </div>
-                        <div class="stat-bg"></div>
-                    </div>
-                    
-                    <div class="stat-card" style="--card-color: var(--light-accent)">
-                        <div class="stat-icon">
-                            <i class="fas fa-heart"></i>
-                        </div>
-                        <div class="stat-info">
-                            <h3 class="wishlist-count">0</h3>
-                            <p>Wishlist Items</p>
-                        </div>
-                        <div class="stat-bg"></div>
-                    </div>
-                    
-                    <div class="stat-card" style="--card-color: var(--mid-accent)">
-                        <div class="stat-icon">
-                            <i class="fas fa-shopping-bag"></i>
-                        </div>
-                        <div class="stat-info">
-                            <h3 class="orders-count">0</h3>
-                            <p>Recent Orders</p>
-                        </div>
-                        <div class="stat-bg"></div>
-                    </div>
-                    
-                    <div class="stat-card" style="--card-color: var(--secondary)">
-                        <div class="stat-icon">
-                            <i class="fas fa-calendar-check"></i>
-                        </div>
-                        <div class="stat-info">
-                            <h3 class="fittings-count">0</h3>
-                            <p>Upcoming Fittings</p>
-                        </div>
-                        <div class="stat-bg"></div>
+                <div class="profile-form" id="profileForm" style="display: none;">
+                    <!-- Filled by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Orders Section -->
+            <section class="dashboard-card orders-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-clipboard-list"></i> My Orders</h2>
+                    <div class="order-tabs">
+                        <button class="tab-btn active" data-tab="past">Past</button>
+                        <button class="tab-btn" data-tab="in-progress">In Progress</button>
+                        <button class="tab-btn" data-tab="cancelled">Cancelled</button>
                     </div>
                 </div>
-                
-                <!-- Dynamic Content Sections -->
-                <div class="section">
-                    <div class="section-header">
-                        <h3>Recent Orders</h3>
-                        <a href="#" class="view-all">View All</a>
-                    </div>
-                    <div class="orders-grid"></div>
+                <div class="orders-list" id="ordersList">
+                    <!-- Filled by JavaScript -->
                 </div>
-                
-                <div class="section">
-                    <div class="section-header">
-                        <h3>Suggestions</h3>
-                        <a href="#" class="view-all">View All</a>
-                    </div>
-                    <div class="suggestions-grid"></div>
-                </div>
+            </section>
+        </div>
+        <!-- Wishlist Section -->
+        <section class="dashboard-card wishlist-card">
+            <div class="card-header">
+                <h2><i class="fas fa-heart"></i> My Wishlist</h2>
             </div>
-        </main>
-    </div>
-    
+            <div class="wishlist-grid" id="wishlistItems">
+                <!-- Filled by JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <footer id="footer" class="footer">
+        <div class="footer-container">
+            <div class="footer-logo">
+                <img src="../resources/logo-dark.png" alt="Regalith Logo">
+                <p>Elegance, Carved in Time</p>
+            </div>
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Collections</a></li>
+                    <li><a href="#">Testimonials</a></li>
+                    <li><a href="#">Careers</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Elegance Ave, Design District</p>
+                <p><i class="fas fa-phone"></i> (123) 456-7890</p>
+                <p><i class="fas fa-envelope"></i> info@regalith.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Regalith. All rights reserved.</p>
+        </div>
+    </footer>
+
     <script src="dashboard.js"></script>
 </body>
 </html>

@@ -5,115 +5,142 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Regalith | Sign Up</title>
     <link rel="stylesheet" href="signUp.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" type="image/x-icon" href="../resources/favicon_32x32.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-<body>
-    <div class="signup-container">
-        <div class="signup-left">
+<body class="light-theme">
+    <nav class="navbar">
+        <div class="nav-container">
             <div class="logo-container">
-                <img src="../resources/Logo.png" alt="Regalith Logo" class="logo">
-                <p class="slogan">Experience timeless elegance with Classic Wear</p>
+                <img src="../resources/logo-light.png" alt="Regalith Logo" class="logo">
             </div>
-            
-            <div class="animated-background">
-                <div class="fabric-texture"></div>
-                <div class="fabric-texture"></div>
-                <div class="fabric-texture"></div>
-            </div>
+            <ul class="nav-links">
+                <li><a href="../main/main.html"><i class="fas fa-store"></i> Shop</a></li>
+                <li><a href="../dashboard/dashboard.html"><i class="fas fa-user"></i> Profile</a></li>
+                <li class="cart-item">
+                    <a href="../cart/cart.html"><i class="fas fa-shopping-cart"></i> Cart <span class="cart-count">0</span></a>
+                </li>
+                <li><a href="#footer"><i class="fas fa-envelope"></i> Contact</a></li>
+                <li>
+                    <button class="theme-toggle" aria-label="Toggle theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </li>
+            </ul>
         </div>
-        
-        <div class="signup-right">
-            <div class="signup-form">
-                <h2>Create Account</h2>
-                <p class="form-subtitle">Join Regalith for exclusive benefits</p>
-                
-                <form id="signupForm">
-                    <!-- Initial Signup Step -->
-                    <div id="initialStep">
-                        <div class="input-group">
-                            <i class="fas fa-user icon"></i>
-                            <input type="text" id="name" placeholder="Full Name" required>
-                        </div>
-                        
-                        <div class="input-group">
-                            <i class="fas fa-envelope icon"></i>
-                            <input type="email" id="email" placeholder="Email Address" required>
-                        </div>
-                        
-                        <div class="input-group">
-                            <i class="fas fa-lock icon"></i>
-                            <input type="password" id="password" placeholder="Password" required>
-                            <i class="fas fa-eye-slash toggle-password" onclick="togglePasswordVisibility('password')"></i>
-                        </div>
-                        
-                        <div class="input-group">
-                            <i class="fas fa-lock icon"></i>
-                            <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
-                            <i class="fas fa-eye-slash toggle-password" onclick="togglePasswordVisibility('confirmPassword')"></i>
-                        </div>
-                        
-                        <div class="terms-checkbox">
-                            <input type="checkbox" id="terms" required>
-                            <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
-                        </div>
-                        
-                        <button type="button" id="sendOtpBtn" class="signup-btn">
-                            <span>Continue</span>
-                            <i class="fas fa-arrow-right"></i>
-                        </button>
-                    </div>
-                    
-                    <!-- OTP Verification Step (hidden initially) -->
-                    <div id="otpStep" style="display: none;">
-                        <div class="otp-header">
-                            <i class="fas fa-envelope-open-text otp-icon"></i>
-                            <h3>Verify Your Email</h3>
-                            <p>We've sent a 6-digit code to <span id="userEmailDisplay"></span></p>
-                        </div>
-                        
-                        <div class="otp-inputs">
-                            <input type="text" maxlength="1" class="otp-digit" data-index="1">
-                            <input type="text" maxlength="1" class="otp-digit" data-index="2">
-                            <input type="text" maxlength="1" class="otp-digit" data-index="3">
-                            <input type="text" maxlength="1" class="otp-digit" data-index="4">
-                            <input type="text" maxlength="1" class="otp-digit" data-index="5">
-                            <input type="text" maxlength="1" class="otp-digit" data-index="6">
-                        </div>
-                        
-                        <p class="otp-resend">Didn't receive code? <a href="#" id="resendOtp">Resend</a></p>
-                        
-                        <div class="otp-buttons">
-                            <button type="button" id="backToSignup" class="back-btn">
-                                <i class="fas fa-arrow-left"></i>
-                                <span>Back</span>
-                            </button>
-                            <button type="button" id="verifyOtpBtn" class="verify-btn">
-                                <span>Verify</span>
-                                <i class="fas fa-check"></i>
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="divider">
-                        <span>or</span>
-                    </div>
-                    
-                    <div class="social-login">
-                        <button type="button" class="social-btn facebook">
-                            <i class="fab fa-facebook"></i>
-                        </button>
-                        <button type="button" class="social-btn google">
-                            <i class="fab fa-google"></i>
-                        </button>
-                    </div>
-                    
-                    <p class="login-link">Already have an account? <a href="../login/login.html">Log in</a></p>
-                </form>
+    </nav>
+
+    <main class="signup-container">
+        <div class="signup-card">
+            <div class="logo-wrapper">
+                <img src="../resources/logo-light.png" alt="Regalith Logo" class="signup-logo">
             </div>
+            <p class="slogan">Elegance, Carved in Time</p>
+            <h2>Create Your Account</h2>
+            <form id="signupForm">
+                <div class="form-group">
+                    <label for="fullname">Full Name</label>
+                    <input type="text" id="fullname" name="fullname" required>
+                    <i class="fas fa-user input-icon"></i>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                    <i class="fas fa-envelope input-icon"></i>
+                </div>
+                
+                <div class="form-group password-container">
+                    <label for="password">Password</label>
+                    <div class="password-input-wrapper">
+                        <input type="password" id="password" name="password" required>
+                        <i class="fas fa-lock input-icon"></i>
+                        <i class="fas fa-eye password-toggle" id="togglePassword"></i>
+                    </div>
+                    <div class="password-strength">
+                        <div class="strength-meter">
+                            <span class="strength-bar weak"></span>
+                            <span class="strength-bar medium"></span>
+                            <span class="strength-bar strong"></span>
+                        </div>
+                        <div class="strength-text">Password Strength: <span id="strengthText">Weak</span></div>
+                        <ul class="password-requirements">
+                            <li class="req-length">At least 8 characters</li>
+                            <li class="req-uppercase">Contains uppercase</li>
+                            <li class="req-number">Contains number</li>
+                            <li class="req-special">Contains special character</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required>
+                    <i class="fas fa-lock input-icon"></i>
+                    <i class="fas fa-eye password-toggle" id="toggleConfirmPassword"></i>
+                    <div id="passwordMatch" class="password-match"></div>
+                </div>
+                
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="terms" name="terms" required>
+                    <label for="terms">I agree to the <a href="#" class="terms-link">Terms and Conditions</a></label>
+                </div>
+                
+                <button type="submit" class="signup-btn" id="signupBtn" disabled>Sign Up</button>
+                
+                <div class="login-redirect">
+                    Already have an account? <a href="../login/login.html">Log in</a>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- OTP Verification Modal -->
+    <div class="modal" id="otpModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>Verify Your Email</h3>
+            <p>We've sent a 6-digit verification code to <span id="userEmail"></span></p>
+            <div class="otp-inputs">
+                <input type="text" maxlength="1" class="otp-input">
+                <input type="text" maxlength="1" class="otp-input">
+                <input type="text" maxlength="1" class="otp-input">
+                <input type="text" maxlength="1" class="otp-input">
+                <input type="text" maxlength="1" class="otp-input">
+                <input type="text" maxlength="1" class="otp-input">
+            </div>
+            <p class="resend-otp">Didn't receive code? <a href="#" id="resendOtp">Resend</a></p>
+            <button class="verify-btn" id="verifyBtn">Verify</button>
         </div>
     </div>
-    
+
+    <footer id="footer" class="footer">
+        <div class="footer-container">
+            <div class="footer-logo">
+                <img src="../resources/logo-dark.png" alt="Regalith Logo">
+                <p>Elegance, Carved in Time</p>
+            </div>
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Collections</a></li>
+                    <li><a href="#">Testimonials</a></li>
+                    <li><a href="#">Careers</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Elegance Ave, Design District</p>
+                <p><i class="fas fa-phone"></i> (123) 456-7890</p>
+                <p><i class="fas fa-envelope"></i> info@regalith.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Regalith. All rights reserved.</p>
+        </div>
+    </footer>
+
     <script src="signUp.js"></script>
 </body>
 </html>

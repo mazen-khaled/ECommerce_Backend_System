@@ -1,4 +1,41 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Theme Toggle Functionality
+    const themeToggle = document.querySelector('.theme-toggle');
+    const body = document.body;
+    const logo = document.querySelector('.logo');
+    const loginLogo = document.querySelector('.login-logo');
+    
+    // Check for saved theme preference or use preferred color scheme
+    const savedTheme = localStorage.getItem('theme') || 
+                       (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    
+    if (savedTheme === 'dark') {
+        body.classList.add('dark-theme');
+        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        logo.src = '../resources/logo-dark.png';
+        loginLogo.src = '../resources/logo-dark.png';
+    } else {
+        logo.src = '../resources/logo-light.png';
+        loginLogo.src = '../resources/logo-light.png';
+    }
+    
+    themeToggle.addEventListener('click', function() {
+        body.classList.toggle('dark-theme');
+        
+        if (body.classList.contains('dark-theme')) {
+            localStorage.setItem('theme', 'dark');
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            logo.src = '../resources/logo-dark.png';
+            loginLogo.src = '../resources/logo-dark.png';
+        } else {
+            localStorage.setItem('theme', 'light');
+            themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            logo.src = '../resources/logo-light.png';
+            loginLogo.src = '../resources/logo-light.png';
+        }
+    });
+    
+    // Form Submission
     const loginForm = document.getElementById('loginForm');
     
     loginForm.addEventListener('submit', async function(e) {
@@ -8,122 +45,85 @@ document.addEventListener('DOMContentLoaded', function() {
         const password = document.getElementById('password').value;
         const rememberMe = document.getElementById('remember').checked;
         
-        // Simple validation
-        if (!email || !password) {
-            showError('Please fill in all fields');
-            return;
-        }
-        
-        // Email validation
-        if (!validateEmail(email)) {
-            showError('Please enter a valid email address');
-            return;
-        }
-        
-        // Show loading state
-        const submitBtn = loginForm.querySelector('button[type="submit"]');
-        const originalText = submitBtn.innerHTML;
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing In...';
-        submitBtn.disabled = true;
-        
         try {
-            const response = await loginUser(email, password);
+            const response = await fetch('http://localhost:8080/api/Authentication/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: email,
+                    password: password
+                })
+            });
             
-            if (response) {
-                // Store remember me preference
-                if (rememberMe) {
-                    localStorage.setItem('rememberMe', 'true');
-                    localStorage.setItem('email', email);
-                } else {
-                    localStorage.removeItem('rememberMe');
-                    localStorage.removeItem('email');
-                }
-                
-                // Redirect to dashboard on successful login
-                window.location.href = '../dashboard/dashboard.html';
-            } else {
-                showError('Invalid email or password');
+            if (!response.ok) {
+                throw new Error('Login failed');
             }
+            
+            const data = await response.text();
+            
+            // Handle successful login
+            console.log('Login successful:', data);
+            
+            // Store token if remember me is checked
+            if (rememberMe) {
+                localStorage.setItem('authToken', data);
+            } else {
+                sessionStorage.setItem('authToken', data);
+            }
+            
+            // Redirect to dashboard or home page
+            window.location.href = '../dashboard/dashboard.html';
+            
         } catch (error) {
             console.error('Login error:', error);
-            showError('An error occurred during login. Please try again.');
-        } finally {
-            submitBtn.innerHTML = originalText;
-            submitBtn.disabled = false;
+            alert('Login failed. Please check your credentials and try again.');
         }
     });
     
-    // Check for remember me
-    if (localStorage.getItem('rememberMe') === 'true') {
-        const savedEmail = localStorage.getItem('email');
-        if (savedEmail) {
-            document.getElementById('email').value = savedEmail;
-            document.getElementById('remember').checked = true;
-        }
-    }
+    // Social Login Handlers
+    const googleBtn = document.querySelector('.google-btn');
+    const facebookBtn = document.querySelector('.facebook-btn');
+    
+    googleBtn.addEventListener('click', function() {
+        // Implement Google OAuth here
+        console.log('Google login clicked');
+        // window.location.href = '/auth/google';
+    });
+    
+    facebookBtn.addEventListener('click', function() {
+        // Implement Facebook OAuth here
+        console.log('Facebook login clicked');
+        // window.location.href = '/auth/facebook';
+    });
+    
+    // Forgot Password
+    const forgotPassword = document.querySelector('.forgot-password');
+    
+    forgotPassword.addEventListener('click', function(e) {
+        e.preventDefault();
+        // Implement forgot password flow
+        console.log('Forgot password clicked');
+        // window.location.href = '/forgot-password';
+    });
+    
+    // Cart Count (example - would normally come from backend)
+    const cartCount = document.querySelector('.cart-count');
+    // This would typically be fetched from the server
+    cartCount.textContent = '0';
 });
 
-function togglePasswordVisibility() {
-    const passwordInput = document.getElementById('password');
-    const toggleIcon = document.querySelector('.toggle-password');
-    
-    if (passwordInput.type === 'password') {
-        passwordInput.type = 'text';
-        toggleIcon.classList.replace('fa-eye-slash', 'fa-eye');
-    } else {
-        passwordInput.type = 'password';
-        toggleIcon.classList.replace('fa-eye', 'fa-eye-slash');
-    }
-}
+// Password toggle functionality
+const togglePassword = document.getElementById('togglePassword');
+const password = document.getElementById('password');
 
-async function loginUser(email, password) {
-    try {
-        const response = await fetch('http://localhost:8080/api/Authentication/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                email: email,
-                password: password
-            })
-        });
-        
-        if (!response.ok) {
-            throw new Error('Login failed');
-        }
-        
-        const data = await response.text();
-        return data; // Assuming the API returns a token or success message
-        
-    } catch (error) {
-        console.error('Error:', error);
-        throw error;
-    }
-}
-
-function validateEmail(email) {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
-}
-
-function showError(message) {
-    // Create or show error message element
-    let errorElement = document.querySelector('.error-message');
+togglePassword.addEventListener('click', function() {
+    // Toggle the type attribute
+    const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+    password.setAttribute('type', type);
     
-    if (!errorElement) {
-        errorElement = document.createElement('div');
-        errorElement.className = 'error-message';
-        document.querySelector('.login-form').insertBefore(errorElement, loginForm.firstChild);
-    }
-    
-    errorElement.textContent = message;
-    errorElement.style.color = '#ff6b6b';
-    errorElement.style.marginBottom = '1rem';
-    errorElement.style.animation = 'shake 0.5s';
-    
-    // Remove animation after it completes
-    setTimeout(() => {
-        errorElement.style.animation = '';
-    }, 500);
-}
+    // Toggle the eye icon
+    this.classList.toggle('fa-eye');
+    this.classList.toggle('fa-eye-slash');
+});

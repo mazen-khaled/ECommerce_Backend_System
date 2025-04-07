@@ -1,237 +1,88 @@
+<!-- store.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Regalith | Classic Wear</title>
+    <title>Regalith | Furniture Store</title>
     <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" type="image/x-icon" href="../resources/favicon_32x32.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-<body>
-    <!-- Navigation Bar -->
-    <nav class="main-nav">
+<body class="light-theme">
+    <nav class="navbar">
         <div class="nav-container">
-            <div class="nav-left">
-                <a href="#" class="logo">
-                    <img src="../resources/Logo.png" alt="Regalith Logo">
-                </a>
+            <div class="logo-container">
+                <img src="../resources/logo-light.png" alt="Regalith Logo" class="logo">
             </div>
-            
-            <div class="nav-center">
-                <ul class="nav-links">
-                    <li><a href="#">Home</a></li>
-                    <li class="dropdown">
-                        <a href="#">Men &nbsp<i class="fa-solid fa-caret-down"></i></a>
-                        <div class="dropdown-menu">
-                            <a href="#" data-category="men-suits">Suits</a>
-                            <a href="#" data-category="men-shirts">Shirts</a>
-                            <a href="#" data-category="men-trousers">Trousers</a>
-                            <a href="#" data-category="men-accessories">Accessories</a>
-                        </div>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#">Women &nbsp<i class="fa-solid fa-caret-down"></i></i></a>
-                        <div class="dropdown-menu">
-                            <a href="#" data-category="women-dresses">Dresses</a>
-                            <a href="#" data-category="women-blouses">Blouses</a>
-                            <a href="#" data-category="women-skirts">Skirts</a>
-                            <a href="#" data-category="women-accessories">Accessories</a>
-                        </div>
-                    </li>
-                    <li><a href="#">Collections</a></li>
-                    <li><a href="#">About</a></li>
-                </ul>
-            </div>
-            
-            <div class="nav-right">
-                <div class="search-bar">
-                    <input type="text" placeholder="Search..." id="searchInput">
-                    <i class="fas fa-search"></i>
-                </div>
-                <a href="#" class="nav-icon"><i class="far fa-heart"></i><span class="wishlist-count">0</span></a>
-                <a href="#" class="nav-icon"><i class="fas fa-shopping-bag"></i><span class="cart-count">0</span></a>
-                <a href="../dashboard/dashboard.html" class="nav-icon"><i class="far fa-user"></i></a>
-                <button class="menu-toggle"><i class="fas fa-bars"></i></button>
-            </div>
+            <ul class="nav-links">
+                <li><a href="../dashboard/dashboard.html"><i class="fas fa-user"></i> Profile</a></li>
+                <li class="cart-item">
+                    <a href="#"><i class="fas fa-shopping-cart"></i> Cart <span class="cart-count">0</span></a>
+                </li>
+                <li><a href="#footer"><i class="fas fa-envelope"></i> Contact</a></li>
+                <li>
+                    <button class="theme-toggle" aria-label="Toggle theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </li>
+            </ul>
         </div>
     </nav>
-    
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Timeless Elegance</h1>
-            <p>Discover our new collection of classic wear for the modern individual</p>
-            <a href="#products" class="cta-btn">Shop Now</a>
-        </div>
-        <div class="hero-overlay"></div>
-    </section>
-    
-    <!-- Main Content -->
-    <main class="store-main">
-        <!-- Filters Section -->
-        <aside class="filters-sidebar">
-            <div class="filters-header">
-                <h3>Filters</h3>
-                <button class="clear-filters">Clear All</button>
+
+    <main class="store-container">
+        <!-- Categories Section -->
+        <section class="categories-section">
+            <h2 class="section-title">Explore Collections</h2>
+            <div class="categories-grid" id="categoriesGrid"></div>
+        </section>
+
+        <!-- On Sale Section -->
+        <section class="products-section">
+            <div class="section-header">
+                <h2 class="section-title">On Sale</h2>
+                <a href="#" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
             </div>
-            
-            <!-- Category Filter -->
-            <div class="filter-group">
-                <div class="filter-header">
-                    <h4>Category</h4>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="filter-options">
-                    <label class="filter-option">
-                        <input type="checkbox" name="category" value="men">
-                        <span>Men's Wear</span>
-                    </label>
-                    <label class="filter-option">
-                        <input type="checkbox" name="category" value="women">
-                        <span>Women's Wear</span>
-                    </label>
-                    <label class="filter-option">
-                        <input type="checkbox" name="category" value="accessories">
-                        <span>Accessories</span>
-                    </label>
-                </div>
+            <div class="products-grid" id="onSaleProducts"></div>
+        </section>
+
+        <!-- Best Sellers Section -->
+        <section class="products-section">
+            <div class="section-header">
+                <h2 class="section-title">Best Sellers</h2>
+                <a href="#" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
             </div>
-            
-            <!-- Price Filter -->
-            <div class="filter-group">
-                <div class="filter-header">
-                    <h4>Price Range</h4>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="filter-options">
-                    <div class="price-range">
-                        <input type="range" min="0" max="1000" value="1000" class="price-slider" id="priceRange">
-                        <div class="price-values">
-                            <span>$0</span>
-                            <span>$1000</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Size Filter -->
-            <div class="filter-group">
-                <div class="filter-header">
-                    <h4>Size</h4>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="filter-options size-options">
-                    <label class="size-option">
-                        <input type="checkbox" name="size" value="XS">
-                        <span>XS</span>
-                    </label>
-                    <label class="size-option">
-                        <input type="checkbox" name="size" value="S">
-                        <span>S</span>
-                    </label>
-                    <label class="size-option">
-                        <input type="checkbox" name="size" value="M">
-                        <span>M</span>
-                    </label>
-                    <label class="size-option">
-                        <input type="checkbox" name="size" value="L">
-                        <span>L</span>
-                    </label>
-                    <label class="size-option">
-                        <input type="checkbox" name="size" value="XL">
-                        <span>XL</span>
-                    </label>
-                </div>
-            </div>
-            
-            <!-- Color Filter -->
-            <div class="filter-group">
-                <div class="filter-header">
-                    <h4>Color</h4>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="filter-options color-options">
-                    <label class="color-option" style="--color: #000000">
-                        <input type="checkbox" name="color" value="black">
-                        <span class="color-checkbox"></span>
-                    </label>
-                    <label class="color-option" style="--color: #FFFFFF">
-                        <input type="checkbox" name="color" value="white">
-                        <span class="color-checkbox"></span>
-                    </label>
-                    <label class="color-option" style="--color: #172815">
-                        <input type="checkbox" name="color" value="green">
-                        <span class="color-checkbox"></span>
-                    </label>
-                    <label class="color-option" style="--color: #3E5622">
-                        <input type="checkbox" name="color" value="olive">
-                        <span class="color-checkbox"></span>
-                    </label>
-                    <label class="color-option" style="--color: #709255">
-                        <input type="checkbox" name="color" value="sage">
-                        <span class="color-checkbox"></span>
-                    </label>
-                    <label class="color-option" style="--color: #FAA916">
-                        <input type="checkbox" name="color" value="gold">
-                        <span class="color-checkbox"></span>
-                    </label>
-                </div>
-            </div>
-        </aside>
-        
-        <!-- Products Section -->
-        <section class="products-section" id="products">
-            <div class="products-header">
-                <h2>Our Collection</h2>
-                <div class="sort-options">
-                    <label for="sortSelect">Sort by:</label>
-                    <select id="sortSelect">
-                        <option value="featured">Featured</option>
-                        <option value="price-low">Price: Low to High</option>
-                        <option value="price-high">Price: High to Low</option>
-                        <option value="newest">Newest Arrivals</option>
-                        <option value="rating">Customer Rating</option>
-                    </select>
-                </div>
-            </div>
-            
-            <!-- Sample Product Card (will be generated by JavaScript) -->
-            <div class="products-grid">
-                <!-- Products will be dynamically inserted here -->
-            </div>
-            
-            <div class="pagination">
-                <button class="pagination-btn" id="prevPage" disabled>
-                    <i class="fas fa-chevron-left"></i> Previous
-                </button>
-                <div class="page-numbers">
-                    <span class="current-page">1</span>
-                    <span>of</span>
-                    <span class="total-pages">3</span>
-                </div>
-                <button class="pagination-btn" id="nextPage">
-                    Next <i class="fas fa-chevron-right"></i>
-                </button>
-            </div>
+            <div class="products-grid" id="bestSellers"></div>
         </section>
     </main>
-    
-    <!-- Quick View Modal -->
-    <div class="modal" id="quickViewModal">
-        <div class="modal-content">
-            <button class="close-modal">&times;</button>
-            <div class="modal-product">
-                <div class="modal-product-images">
-                    <!-- Images will be inserted here -->
-                </div>
-                <div class="modal-product-info">
-                    <!-- Product info will be inserted here -->
-                </div>
+
+    <footer id="footer" class="footer">
+        <div class="footer-container">
+            <div class="footer-logo">
+                <img src="../resources/logo-dark.png" alt="Regalith Logo">
+                <p>Elegance, Carved in Time</p>
+            </div>
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Collections</a></li>
+                    <li><a href="#">Testimonials</a></li>
+                    <li><a href="#">Careers</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Elegance Ave, Design District</p>
+                <p><i class="fas fa-phone"></i> (123) 456-7890</p>
+                <p><i class="fas fa-envelope"></i> info@regalith.com</p>
             </div>
         </div>
-    </div>
-    
+        <div class="footer-bottom">
+            <p>&copy; 2023 Regalith. All rights reserved.</p>
+        </div>
+    </footer>
+
     <script src="main.js"></script>
 </body>
 </html>
