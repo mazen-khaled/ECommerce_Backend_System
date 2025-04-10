@@ -99,7 +99,7 @@ body.dark-theme {
 
 .cart-count {
     background-color: var(--secondary-light);
-    color: white;
+    color: var(--primary-dark);
     border-radius: 50%;
     width: 20px;
     height: 20px;
@@ -317,7 +317,7 @@ body.dark-theme {
     width: 100%;
     padding: 0.8rem;
     background-color: var(--secondary-light);
-    color: white;
+    color: var(--primary-dark);
     border: none;
     border-radius: var(--border-radius);
     font-size: 1rem;

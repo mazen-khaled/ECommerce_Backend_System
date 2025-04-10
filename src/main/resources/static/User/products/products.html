@@ -1,12 +1,11 @@
-<!-- store.html -->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Regalith | Furniture Store</title>
-    <link rel="stylesheet" href="main.css">
+    <title>Regalith | Room Products</title>
+    <link rel="stylesheet" href="products.css">
     <link rel="icon" type="image/x-icon" href="../resources/favicon_32x32.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -52,17 +51,29 @@
             </div>
         </div>
     </div>
+    
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo-container">
                 <img src="../resources/logo-light.png" alt="Regalith Logo" class="logo">
             </div>
             <ul class="nav-links">
-                <li><a href="../dashboard/dashboard.html"><i class="fas fa-user"></i> Profile</a></li>
+                <li><a href="../main/main.html"><i class="fas fa-home"></i> Home</a></li>
+                <li class="dropdown">
+                    <button class="dropdown-btn" id="roomDropdown">
+                        <i class="fas fa-couch"></i> <span id="currentRoom">Living Room</span> <i
+                            class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="dropdown-content">
+                        <!-- Filled by JavaScript -->
+                    </div>
+                </li>
+
+                <li><a href="#footer"><i class="fas fa-envelope"></i> Contact</a></li>
                 <li class="cart-item">
                     <a href="#"><i class="fas fa-shopping-cart"></i> Cart <span class="cart-count">0</span></a>
                 </li>
-                <li><a href="#footer"><i class="fas fa-envelope"></i> Contact</a></li>
+                <li><a href="../dashboard/dashboard.html"><i class="fas fa-user"></i> Profile</a></li>
                 <li>
                     <button class="theme-toggle" aria-label="Toggle theme">
                         <i class="fas fa-moon"></i>
@@ -71,30 +82,67 @@
             </ul>
         </div>
     </nav>
-    <main class="store-container">
-        <!-- Categories Section -->
-        <section class="categories-section">
-            <h2 class="section-title">Explore Collections</h2>
-            <div class="categories-grid" id="categoriesGrid"></div>
-        </section>
 
-        <!-- On Sale Section -->
-        <section class="products-section">
-            <div class="section-header">
-                <h2 class="section-title">On Sale</h2>
-                <a href="#" class="view-all" data-category="on-sale">View All</a>
-            </div>
-            <div class="products-grid" id="onSaleProducts"></div>
-        </section>
+    <main class="products-container">
+        <div class="products-header">
+            <h1 id="roomTitle">Living Room</h1>
+            <p class="slogan">Elegance, Carved in Time</p>
 
-        <!-- Best Sellers Section -->
-        <section class="products-section">
-            <div class="section-header">
-                <h2 class="section-title">Best Sellers</h2>
-                <a href="#" class="view-all" data-category="best-sellers">View All</a>
+            <div class="controls">
+                <div class="filters">
+                    <button class="filter-btn" id="filterBtn"><i class="fas fa-filter"></i> Filters</button>
+                    <div class="filter-dropdown" id="filterDropdown">
+                        <div class="filter-section">
+                            <h3>Price Range</h3>
+                            <div class="price-range">
+                                <div class="price-indicators">
+                                    <span id="currentMinPrice">$0</span>
+                                    <span id="currentMaxPrice">$5000</span>
+                                </div>
+                                <input type="range" min="0" max="5000" value="5000" class="slider" id="priceRange">
+                                <div class="price-values">
+                                    <span id="minPrice">$0</span>
+                                    <span id="maxPrice">$5000+</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filter-section">
+                            <h3>Categories</h3>
+                            <div class="filter-options" id="categoryFilters">
+                                <!-- Filled by JavaScript -->
+                            </div>
+                        </div>
+                        <div class="filter-actions">
+                            <button class="apply-btn">Apply Filters</button>
+                            <button class="reset-btn">Reset</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sort">
+                    <label for="sortOptions">Sort by:</label>
+                    <select id="sortOptions" class="sort-select">
+                        <option value="featured">Featured</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="name-asc">Name: A-Z</option>
+                        <option value="name-desc">Name: Z-A</option>
+                        <option value="best-selling">Best Selling</option>
+                        <option value="newest">Newest Arrivals</option>
+                    </select>
+                </div>
             </div>
-            <div class="products-grid" id="bestSellers"></div>
-        </section>
+        </div>
+
+        <div class="products-grid" id="productsGrid">
+            <!-- Filled by JavaScript -->
+        </div>
+
+        <div class="pagination">
+            <button class="pagination-btn" id="prevPage" disabled><i class="fas fa-chevron-left"></i> Previous</button>
+            <div class="page-numbers" id="pageNumbers"></div>
+            <button class="pagination-btn" id="nextPage">Next <i class="fas fa-chevron-right"></i></button>
+        </div>
     </main>
 
     <footer id="footer" class="footer">
@@ -124,7 +172,7 @@
         </div>
     </footer>
 
-    <script src="main.js"></script>
+    <script src="products.js"></script>
 </body>
 
 </html>
