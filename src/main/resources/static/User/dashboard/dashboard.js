@@ -1,5 +1,250 @@
 let currentProductId;
 
+// Mock Data - Replace with API calls later
+const userData = {
+    id: 12345,
+    name: "Mazen Khaled",
+    email: "Mazen-Khaled@example.com",
+    phone: "+20 1205843080",
+    address: "Egypt",
+    joinDate: "January 15, 2025",
+};
+
+const products = [
+    {
+        id: 101,
+        name: "Modern Leather Sofa",
+        room: "living-room",
+        category: "Sofas",
+        originalPrice: 1299.99,
+        salePrice: 299.99,
+        image: "https://articture.com/cdn/shop/files/image_4_a1d732f9-f198-427b-b04b-4f9074fb338b_800x.jpg?v=1695745828",
+        thumbnails: [
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSstIz5iT-l_x2vjfGmUyEQ17yOT5xgr03og&s",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ9TbqQJt4UtqlFf7S7ZSvWzq_vZjlMmTADQ&s",
+            "https://media.istockphoto.com/id/1068258892/photo/real-photo-of-a-leather-couch-in-a-living-room-interior.jpg?s=612x612&w=0&k=20&c=BroDHN5n3pk0HIvKTxCksciT1ZhoodzuCgcxQzmAUPc=",
+            "https://www.elhelowgroup.com/wp-content/uploads/2023/06/york-sofa-elhelow-group-6-600x400.jpg"
+        ],
+        description: "High quality modern leather sofa for your living room.",
+        rating: 4.7,
+        reviews: [
+            {
+                name: "Ali",
+                date: "2025-04-01",
+                rating: 5,
+                text: "Absolutely love it!"
+            },
+            {
+                name: "Nora",
+                date: "2025-03-20",
+                rating: 4,
+                text: "Stylish and comfy."
+            }
+        ],
+        isNew: true,
+        isBestSeller: false,
+        isOnSale: false,
+        discountPercentage: 0,
+    },
+    {
+        id: 102,
+        name: "Leather Sofa",
+        room: "living-room",
+        category: "Sofas",
+        originalPrice: 3000.99,
+        salePrice: 1299.99,
+        image: "https://articture.com/cdn/shop/files/image_4_a1d732f9-f198-427b-b04b-4f9074fb338b_800x.jpg?v=1695745828",
+        thumbnails: [
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSstIz5iT-l_x2vjfGmUyEQ17yOT5xgr03og&s",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ9TbqQJt4UtqlFf7S7ZSvWzq_vZjlMmTADQ&s",
+            "https://media.istockphoto.com/id/1068258892/photo/real-photo-of-a-leather-couch-in-a-living-room-interior.jpg?s=612x612&w=0&k=20&c=BroDHN5n3pk0HIvKTxCksciT1ZhoodzuCgcxQzmAUPc=",
+            "https://www.elhelowgroup.com/wp-content/uploads/2023/06/york-sofa-elhelow-group-6-600x400.jpg"
+        ],
+        description: "High quality modern leather sofa for your living room.",
+        rating: 4.7,
+        reviews: [
+            {
+                name: "Ali",
+                date: "2025-04-01",
+                rating: 5,
+                text: "Absolutely love it!"
+            },
+            {
+                name: "Nora",
+                date: "2025-03-20",
+                rating: 4,
+                text: "Stylish and comfy."
+            }
+        ],
+        isNew: false,
+        isBestSeller: false,
+        isOnSale: true,
+        discountPercentage: 20,
+    },
+    {
+        id: 103,
+        name: "Modern Leather Sofa",
+        category: "Sofas",
+        room: "living-room",
+        originalPrice: 1624.99,
+        salePrice: 1299.99,
+        image: "https://articture.com/cdn/shop/files/image_4_a1d732f9-f198-427b-b04b-4f9074fb338b_800x.jpg?v=1695745828",
+        thumbnails: [
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSstIz5iT-l_x2vjfGmUyEQ17yOT5xgr03og&s",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ9TbqQJt4UtqlFf7S7ZSvWzq_vZjlMmTADQ&s",
+            "https://media.istockphoto.com/id/1068258892/photo/real-photo-of-a-leather-couch-in-a-living-room-interior.jpg?s=612x612&w=0&k=20&c=BroDHN5n3pk0HIvKTxCksciT1ZhoodzuCgcxQzmAUPc=",
+            "https://www.elhelowgroup.com/wp-content/uploads/2023/06/york-sofa-elhelow-group-6-600x400.jpg"
+        ],
+        description: "High quality modern leather sofa for your living room.",
+        rating: 4.7,
+        reviews: [
+            {
+                name: "Ali",
+                date: "2025-04-01",
+                rating: 5,
+                text: "Absolutely love it!"
+            },
+            {
+                name: "Nora",
+                date: "2025-03-20",
+                rating: 4,
+                text: "Stylish and comfy."
+            }
+        ],
+        isNew: false,
+        isBestSeller: true,
+        isOnSale: false,
+        discountPercentage: 0,
+    },
+    {
+        id: 201,
+        name: "King Size Bed Frame",
+        room: "bedroom",
+        category: "Beds",
+        originalPrice: 1624.99,
+        salePrice: 1299.99,
+        image: "https://eg-rv.homzmart.net/catalog/product/e/n/eng.fur.36-2_1.jpg",
+        thumbnails: [
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSstIz5iT-l_x2vjfGmUyEQ17yOT5xgr03og&s",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ9TbqQJt4UtqlFf7S7ZSvWzq_vZjlMmTADQ&s",
+            "https://media.istockphoto.com/id/1068258892/photo/real-photo-of-a-leather-couch-in-a-living-room-interior.jpg?s=612x612&w=0&k=20&c=BroDHN5n3pk0HIvKTxCksciT1ZhoodzuCgcxQzmAUPc=",
+            "https://www.elhelowgroup.com/wp-content/uploads/2023/06/york-sofa-elhelow-group-6-600x400.jpg"
+        ],
+        description: "High quality modern leather sofa for your living room.",
+        rating: 4.7,
+        reviews: [
+            {
+                name: "Ali",
+                date: "2025-04-01",
+                rating: 5,
+                text: "Absolutely love it!"
+            },
+            {
+                name: "Nora",
+                date: "2025-03-20",
+                rating: 4,
+                text: "Stylish and comfy."
+            }
+        ],
+        isNew: true,
+        isBestSeller: false,
+        isOnSale: true,
+        discountPercentage: 20,
+    },
+    {
+        id: 202,
+        name: "King Size Bed Frame",
+        room: "bedroom",
+        category: "Beds",
+        originalPrice: 1624.99,
+        salePrice: 1299.99,
+        image: "https://eg-rv.homzmart.net/catalog/product/e/n/eng.fur.36-2_1.jpg",
+        thumbnails: [
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSstIz5iT-l_x2vjfGmUyEQ17yOT5xgr03og&s",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ9TbqQJt4UtqlFf7S7ZSvWzq_vZjlMmTADQ&s",
+            "https://media.istockphoto.com/id/1068258892/photo/real-photo-of-a-leather-couch-in-a-living-room-interior.jpg?s=612x612&w=0&k=20&c=BroDHN5n3pk0HIvKTxCksciT1ZhoodzuCgcxQzmAUPc=",
+            "https://www.elhelowgroup.com/wp-content/uploads/2023/06/york-sofa-elhelow-group-6-600x400.jpg"
+        ],
+        description: "High quality modern leather sofa for your living room.",
+        rating: 4.7,
+        reviews: [
+            {
+                name: "Ali",
+                date: "2025-04-01",
+                rating: 5,
+                text: "Absolutely love it!"
+            },
+            {
+                name: "Nora",
+                date: "2025-03-20",
+                rating: 4,
+                text: "Stylish and comfy."
+            }
+        ],
+        isNew: true,
+        isBestSeller: true,
+        isOnSale: true,
+        discountPercentage: 20,
+    },
+]
+
+const userOrders = [
+    {
+        order_id: "ORD-101",
+        date: "May 15, 2023",
+        user_id: userData.id,
+        items: [101, 201],
+        subtotal: 12999,
+        tax: 0,
+        total: 12999,
+        status: 'delivered',
+        canReview: true,
+        canCancel: false,
+        reason: "",
+    },
+    {
+        order_id: "ORD-107",
+        date: "May 15, 2023",
+        user_id: userData.id,
+        items: [101, 201],
+        subtotal: 12999,
+        tax: 0,
+        total: 12999,
+        status: 'delivered',
+        canReview: true,
+        canCancel: false,
+        reason: "",
+    },
+    {
+        order_id: "ORD-102",
+        date: "March 14, 2001",
+        user_id: userData.id,
+        items: [102],
+        subtotal: 999,
+        tax: 0,
+        total: 999,
+        status: 'processing',
+        canReview: false,
+        canCancel: true,
+        reason: "",
+    },
+    {
+        order_id: "ORD-103",
+        date: "Aprial 11, 2019",
+        user_id: userData.id,
+        items: [103],
+        subtotal: 1457,
+        tax: 0,
+        total: 1457,
+        status: 'cancelled',
+        canReview: false,
+        canCancel: true,
+        reason: "",
+    }
+]
+
+const wishlistData = [103, 201, 202];
+
 document.addEventListener('DOMContentLoaded', function () {
     // Theme Toggle (same as previous pages)
     const themeToggle = document.querySelector('.theme-toggle');
@@ -31,376 +276,6 @@ document.addEventListener('DOMContentLoaded', function () {
             logo.src = '../resources/logo-light.png';
         }
     });
-
-    // Mock Data - Replace with API calls later
-    const userData = {
-        id: 12345,
-        name: "Mazen Khaled",
-        email: "Mazen-Khaled@example.com",
-        phone: "+20 1205843080",
-        address: "Egypt",
-        joinDate: "January 15, 2025",
-    };
-
-    const ordersData = {
-        past: [
-            {
-                id: "ORD-1001",
-                date: "March 15, 2023",
-                status: "delivered",
-                products: [
-                    {
-                        id: 101,
-                        name: "Velvet Chesterfield Sofa",
-                        category: "Living Room",
-                        originalPrice: 1299.99,
-                        salePrice: 1299.99,
-                        quantity: 1,
-                        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHMtds0nwWqgdV-0ufamwXzY9lN7kwGQI-Sg&s",
-                        thumbnails: [
-                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSstIz5iT-l_x2vjfGmUyEQ17yOT5xgr03og&s",
-                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ9TbqQJt4UtqlFf7S7ZSvWzq_vZjlMmTADQ&s",
-                            "https://media.istockphoto.com/id/1068258892/photo/real-photo-of-a-leather-couch-in-a-living-room-interior.jpg?s=612x612&w=0&k=20&c=BroDHN5n3pk0HIvKTxCksciT1ZhoodzuCgcxQzmAUPc=",
-                            "https://www.elhelowgroup.com/wp-content/uploads/2023/06/york-sofa-elhelow-group-6-600x400.jpg"
-                        ],
-                        description: "High quality modern leather sofa for your living room.",
-                        rating: 4.7,
-                        reviews: [
-                            {
-                                name: "Ali",
-                                date: "2025-04-01",
-                                rating: 5,
-                                text: "Absolutely love it!"
-                            },
-                            {
-                                name: "Nora",
-                                date: "2025-03-20",
-                                rating: 4,
-                                text: "Stylish and comfy."
-                            }
-                        ],
-                        isNew: false,
-                        isBestSeller: false,
-                        isOnSale: true,
-                        discountPercentage: 20,
-                    },
-                    {
-                        id: 102,
-                        name: "Marble Coffee Table",
-                        category: "Living Room",
-                        originalPrice: 1299.99,
-                        salePrice: 599.99,
-                        quantity: 1,
-                        image: "https://m.media-amazon.com/images/I/81i4N20E85L.jpg",
-                        thumbnails: [
-                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSstIz5iT-l_x2vjfGmUyEQ17yOT5xgr03og&s",
-                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ9TbqQJt4UtqlFf7S7ZSvWzq_vZjlMmTADQ&s",
-                            "https://media.istockphoto.com/id/1068258892/photo/real-photo-of-a-leather-couch-in-a-living-room-interior.jpg?s=612x612&w=0&k=20&c=BroDHN5n3pk0HIvKTxCksciT1ZhoodzuCgcxQzmAUPc=",
-                            "https://www.elhelowgroup.com/wp-content/uploads/2023/06/york-sofa-elhelow-group-6-600x400.jpg"
-                        ],
-                        description: "High quality modern leather sofa for your living room.",
-                        rating: 4.7,
-                        reviews: [
-                            {
-                                name: "Ali",
-                                date: "2025-04-01",
-                                rating: 5,
-                                text: "Absolutely love it!"
-                            },
-                            {
-                                name: "Nora",
-                                date: "2025-03-20",
-                                rating: 4,
-                                text: "Stylish and comfy."
-                            }
-                        ],
-                        isNew: false,
-                        isBestSeller: false,
-                        isOnSale: true,
-                        discountPercentage: 20,
-                    }
-                ],
-                total: 1899.98,
-                canReview: true
-            },
-            {
-                id: "ORD-1002",
-                date: "February 28, 2023",
-                status: "delivered",
-                products: [
-                    {
-                        id: 103,
-                        name: "Mid-Century Armchair",
-                        category: "Living Room",
-                        originalPrice: 1299.99,
-                        salePrice: 499.99,
-                        quantity: 2,
-                        image: "https://cdn20.pamono.com/p/g/1/7/1799564_gxk3w93wvo/mid-century-armchair-in-dusty-pink-boucle-by-henryk-lis-1960s-image-1.jpg",
-                        thumbnails: [
-                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSstIz5iT-l_x2vjfGmUyEQ17yOT5xgr03og&s",
-                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ9TbqQJt4UtqlFf7S7ZSvWzq_vZjlMmTADQ&s",
-                            "https://media.istockphoto.com/id/1068258892/photo/real-photo-of-a-leather-couch-in-a-living-room-interior.jpg?s=612x612&w=0&k=20&c=BroDHN5n3pk0HIvKTxCksciT1ZhoodzuCgcxQzmAUPc=",
-                            "https://www.elhelowgroup.com/wp-content/uploads/2023/06/york-sofa-elhelow-group-6-600x400.jpg"
-                        ],
-                        description: "High quality modern leather sofa for your living room.",
-                        rating: 4.7,
-                        reviews: [
-                            {
-                                name: "Ali",
-                                date: "2025-04-01",
-                                rating: 5,
-                                text: "Absolutely love it!"
-                            },
-                            {
-                                name: "Nora",
-                                date: "2025-03-20",
-                                rating: 4,
-                                text: "Stylish and comfy."
-                            }
-                        ],
-                        isNew: false,
-                        isBestSeller: false,
-                        isOnSale: true,
-                        discountPercentage: 20,
-                    }
-                ],
-                total: 999.98,
-                canReview: false
-            }
-        ],
-        inProgress: [
-            {
-                id: "ORD-1003",
-                date: "April 5, 2023",
-                status: "processing",
-                products: [
-                    {
-                        id: 104,
-                        name: "Industrial Bookshelf",
-                        category: "Living Room",
-                        originalPrice: 1299.99,
-                        salePrice: 799.99,
-                        quantity: 1,
-                        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeD-BiYjvN5gPQphwXBkjUgC8pcyhkqERgkA&s",
-                        thumbnails: [
-                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSstIz5iT-l_x2vjfGmUyEQ17yOT5xgr03og&s",
-                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ9TbqQJt4UtqlFf7S7ZSvWzq_vZjlMmTADQ&s",
-                            "https://media.istockphoto.com/id/1068258892/photo/real-photo-of-a-leather-couch-in-a-living-room-interior.jpg?s=612x612&w=0&k=20&c=BroDHN5n3pk0HIvKTxCksciT1ZhoodzuCgcxQzmAUPc=",
-                            "https://www.elhelowgroup.com/wp-content/uploads/2023/06/york-sofa-elhelow-group-6-600x400.jpg"
-                        ],
-                        description: "High quality modern leather sofa for your living room.",
-                        rating: 4.7,
-                        reviews: [
-                            {
-                                name: "Ali",
-                                date: "2025-04-01",
-                                rating: 5,
-                                text: "Absolutely love it!"
-                            },
-                            {
-                                name: "Nora",
-                                date: "2025-03-20",
-                                rating: 4,
-                                text: "Stylish and comfy."
-                            }
-                        ],
-                        isNew: false,
-                        isBestSeller: false,
-                        isOnSale: true,
-                        discountPercentage: 20,
-                    },
-                    {
-                        id: 105,
-                        name: "Leather Ottoman",
-                        category: "Living Room",
-                        originalPrice: 1299.99,
-                        salePrice: 299.99,
-                        quantity: 1,
-                        image: "https://cb2.scene7.com/is/image/CB2/TuftedRectSaddleLthrOttmnSHS18_1x1/$web_product_hero$&/240215083539/saddle-leather-tufted-ottoman.jpg",
-                        thumbnails: [
-                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSstIz5iT-l_x2vjfGmUyEQ17yOT5xgr03og&s",
-                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ9TbqQJt4UtqlFf7S7ZSvWzq_vZjlMmTADQ&s",
-                            "https://media.istockphoto.com/id/1068258892/photo/real-photo-of-a-leather-couch-in-a-living-room-interior.jpg?s=612x612&w=0&k=20&c=BroDHN5n3pk0HIvKTxCksciT1ZhoodzuCgcxQzmAUPc=",
-                            "https://www.elhelowgroup.com/wp-content/uploads/2023/06/york-sofa-elhelow-group-6-600x400.jpg"
-                        ],
-                        description: "High quality modern leather sofa for your living room.",
-                        rating: 4.7,
-                        reviews: [
-                            {
-                                name: "Ali",
-                                date: "2025-04-01",
-                                rating: 5,
-                                text: "Absolutely love it!"
-                            },
-                            {
-                                name: "Nora",
-                                date: "2025-03-20",
-                                rating: 4,
-                                text: "Stylish and comfy."
-                            }
-                        ],
-                        isNew: false,
-                        isBestSeller: false,
-                        isOnSale: true,
-                        discountPercentage: 20,
-                    }
-                ],
-                total: 1099.98,
-                canCancel: true
-            }
-        ],
-        cancelled: [
-            {
-                id: "ORD-1004",
-                date: "January 10, 2023",
-                status: "cancelled",
-                products: [
-                    {
-                        id: 106,
-                        name: "Modern Dining Table",
-                        category: "Living Room",
-                        originalPrice: 1299.99,
-                        salePrice: 899.99,
-                        quantity: 1,
-                        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2sI-ksxNfcCBdKZZmNucm4B10tYt1CzmLWg&s",
-                        thumbnails: [
-                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSstIz5iT-l_x2vjfGmUyEQ17yOT5xgr03og&s",
-                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ9TbqQJt4UtqlFf7S7ZSvWzq_vZjlMmTADQ&s",
-                            "https://media.istockphoto.com/id/1068258892/photo/real-photo-of-a-leather-couch-in-a-living-room-interior.jpg?s=612x612&w=0&k=20&c=BroDHN5n3pk0HIvKTxCksciT1ZhoodzuCgcxQzmAUPc=",
-                            "https://www.elhelowgroup.com/wp-content/uploads/2023/06/york-sofa-elhelow-group-6-600x400.jpg"
-                        ],
-                        description: "High quality modern leather sofa for your living room.",
-                        rating: 4.7,
-                        reviews: [
-                            {
-                                name: "Ali",
-                                date: "2025-04-01",
-                                rating: 5,
-                                text: "Absolutely love it!"
-                            },
-                            {
-                                name: "Nora",
-                                date: "2025-03-20",
-                                rating: 4,
-                                text: "Stylish and comfy."
-                            }
-                        ],
-                        isNew: false,
-                        isBestSeller: false,
-                        isOnSale: true,
-                        discountPercentage: 20,
-                    }
-                ],
-                total: 899.99,
-                reason: "Changed mind"
-            }
-        ]
-    };
-
-    const wishlistData = [
-        {
-            id: 201,
-            name: "Scandinavian Lounge Chair",
-            category: "Living Room",
-            originalPrice: 1299.99,
-            salePrice: 649.99,
-            image: "https://cdn20.pamono.com/p/g/2/7/273430_tmbuh85gfm/mid-century-scandinavian-lounge-chairs-from-france-and-son-1960s-set-of-2-3.jpg",
-            thumbnails: [
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSstIz5iT-l_x2vjfGmUyEQ17yOT5xgr03og&s",
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ9TbqQJt4UtqlFf7S7ZSvWzq_vZjlMmTADQ&s",
-                "https://media.istockphoto.com/id/1068258892/photo/real-photo-of-a-leather-couch-in-a-living-room-interior.jpg?s=612x612&w=0&k=20&c=BroDHN5n3pk0HIvKTxCksciT1ZhoodzuCgcxQzmAUPc=",
-                "https://www.elhelowgroup.com/wp-content/uploads/2023/06/york-sofa-elhelow-group-6-600x400.jpg"
-            ],
-            description: "High quality modern leather sofa for your living room.",
-            rating: 4.7,
-            reviews: [
-                {
-                    name: "Ali",
-                    date: "2025-04-01",
-                    rating: 5,
-                    text: "Absolutely love it!"
-                },
-                {
-                    name: "Nora",
-                    date: "2025-03-20",
-                    rating: 4,
-                    text: "Stylish and comfy."
-                }
-            ],
-            isNew: false,
-            isBestSeller: true,
-            isOnSale: false,
-            discountPercentage: 0,
-        },
-        {
-            id: 202,
-            name: "Glass Display Cabinet",
-            category: "Living Room",
-            originalPrice: 1299.99,
-            salePrice: 899.99,
-            image: "https://images-cdn.ubuy.co.in/63684aed59ee4b2f334b6b54-famapy-display-cabinet-with-glass-doors.jpg",
-            thumbnails: [
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSstIz5iT-l_x2vjfGmUyEQ17yOT5xgr03og&s",
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ9TbqQJt4UtqlFf7S7ZSvWzq_vZjlMmTADQ&s",
-                "https://media.istockphoto.com/id/1068258892/photo/real-photo-of-a-leather-couch-in-a-living-room-interior.jpg?s=612x612&w=0&k=20&c=BroDHN5n3pk0HIvKTxCksciT1ZhoodzuCgcxQzmAUPc=",
-                "https://www.elhelowgroup.com/wp-content/uploads/2023/06/york-sofa-elhelow-group-6-600x400.jpg"
-            ],
-            description: "High quality modern leather sofa for your living room.",
-            rating: 4.7,
-            reviews: [
-                {
-                    name: "Ali",
-                    date: "2025-04-01",
-                    rating: 5,
-                    text: "Absolutely love it!"
-                },
-                {
-                    name: "Nora",
-                    date: "2025-03-20",
-                    rating: 4,
-                    text: "Stylish and comfy."
-                }
-            ],
-            isNew: false,
-            isBestSeller: false,
-            isOnSale: true,
-            discountPercentage: 20,
-        },
-        {
-            id: 203,
-            name: "Velvet Bed Frame",
-            category: "Living Room",
-            originalPrice: 1299.99,
-            salePrice: 1499.99,
-            image: "https://img.freepik.com/free-photo/grey-comfortable-armchair-isolated-white-background_181624-25295.jpg?t=st=1744015766~exp=1744019366~hmac=fd494df52d9c216fe0a6b148fd823e17dfc3e3e8f868107405714928f9d08a40&w=740",
-            thumbnails: [
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSstIz5iT-l_x2vjfGmUyEQ17yOT5xgr03og&s",
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ9TbqQJt4UtqlFf7S7ZSvWzq_vZjlMmTADQ&s",
-                "https://media.istockphoto.com/id/1068258892/photo/real-photo-of-a-leather-couch-in-a-living-room-interior.jpg?s=612x612&w=0&k=20&c=BroDHN5n3pk0HIvKTxCksciT1ZhoodzuCgcxQzmAUPc=",
-                "https://www.elhelowgroup.com/wp-content/uploads/2023/06/york-sofa-elhelow-group-6-600x400.jpg"
-            ],
-            description: "High quality modern leather sofa for your living room.",
-            rating: 4.7,
-            reviews: [
-                {
-                    name: "Ali",
-                    date: "2025-04-01",
-                    rating: 5,
-                    text: "Absolutely love it!"
-                },
-                {
-                    name: "Nora",
-                    date: "2025-03-20",
-                    rating: 4,
-                    text: "Stylish and comfy."
-                }
-            ],
-            isNew: false,
-            isBestSeller: false,
-            isOnSale: true,
-            discountPercentage: 20,
-        }
-    ];
 
     // =====================
     // Populate User Profile
@@ -439,7 +314,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const tempUserData = { ...data };
 
-        profileData.forEach((key) => {
+        editableFields.forEach((key) => {
             const group = document.createElement("div");
             group.className = "form-group";
 
@@ -514,41 +389,47 @@ document.addEventListener('DOMContentLoaded', function () {
     const tabs = document.querySelectorAll(".tab-btn");
 
     function renderOrders(type) {
-        const orders = ordersData[type];
-        ordersList.innerHTML = "";
+        const filteredOrders = userOrders.filter(order => {
+            if (type === 'past') return order.status === 'delivered';
+            if (type === 'inProgress') return order.status === 'processing';
+            if (type === 'cancelled') return order.status === 'cancelled';
+            return false;
+        });
 
-        orders.forEach(order => {
+        ordersList.innerHTML = "";
+        filteredOrders.forEach(order => {
+            const orderProducts = order.items.map(id =>
+                products.find(p => p.id === id)
+            ).filter(p => p); // Filter out undefined products
+
             const orderDiv = document.createElement("div");
             orderDiv.classList.add("order-item");
-
             orderDiv.innerHTML = `
-            <div class="order-header">
-                <div>
-                    <div class="order-id">${order.id}</div>
-                    <div class="order-date">${order.date}</div>
-                </div>
-                <span class="order-status status-${order.status}">${order.status}</span>
-            </div>
-            <div class="order-products">
-                ${order.products.map((product, i) => `
-                    <div style="display:flex; gap:1rem; align-items:center; margin-bottom: 10px; padding-bottom: 1rem; border-bottom: ${i < order.products.length - 1 ? '1px solid #444' : 'none'};">
-                        <img src="${product.image}" alt="${product.name}" style="width:60px; height:60px; object-fit:cover; border-radius:8px;">
-                        <div>
-                            <div><strong>${product.name}</strong></div>
-                            <div>${product.category}</div>
-                            <div>Qty: ${product.quantity}</div>
-                            <div>Price: $${product.salePrice.toFixed(2)}</div>
-                        </div>
+                <div class="order-header">
+                    <div>
+                        <div class="order-id">${order.order_id}</div>
+                        <div class="order-date">${order.date}</div>
                     </div>
-                `).join("")}            
-            </div>
-            <div class="order-total">Total: $${order.total.toFixed(2)}</div>
-            <div class="order-actions">
-                ${order.canReview ? '<button class="action-btn feedback-btn">Give Feedback</button>' : ""}
-                <button class="action-btn reorder-btn">Reorder</button>
-            </div>
-        `;
-
+                    <span class="order-status status-${order.status}">${order.status}</span>
+                </div>
+                <div class="order-products">
+                    ${orderProducts.map((product, i) => `
+                        <div style="display:flex; gap:1rem; align-items:center; margin-bottom: 10px; padding-bottom: 1rem; border-bottom: ${i < orderProducts.length - 1 ? '1px solid #444' : 'none'};"> 
+                            <img src="${product.image}" alt="${product.name}" style="width:60px; height:60px; object-fit:cover; border-radius:8px;">
+                            <div>
+                                <div><strong>${product.name}</strong></div>
+                                <div>${product.category}</div>
+                                <div>Price: $${product.salePrice.toFixed(2)}</div>
+                            </div>
+                        </div>
+                    `).join("")}
+                </div>
+                <div class="order-total">Total: $${order.total.toFixed(2)}</div>
+                <div class="order-actions">
+                    ${order.canReview ? '<button class="action-btn feedback-btn">Give Feedback</button>' : ""}
+                    ${(order.status) !== "processing" ? '<button class="action-btn reorder-btn">Reorder</button>' : ""}
+                </div>
+            `;
             ordersList.appendChild(orderDiv);
         });
     }
@@ -566,19 +447,13 @@ document.addEventListener('DOMContentLoaded', function () {
     // Handle feedback button clicks
     document.addEventListener('click', function (e) {
         if (e.target.classList.contains('feedback-btn')) {
-            // Find the closest order item
             const orderItem = e.target.closest('.order-item');
             const orderId = orderItem.querySelector('.order-id').textContent;
 
-            // Find the order in our data
-            let order;
-            for (const type in ordersData) {
-                order = ordersData[type].find(o => o.id === orderId);
-                if (order) break;
-            }
+            // Find the order in userOrders
+            const order = userOrders.find(o => o.order_id === orderId);
 
             if (order) {
-                // Create a modal for product selection
                 createProductSelectionModal(order);
             }
         }
@@ -587,12 +462,18 @@ document.addEventListener('DOMContentLoaded', function () {
     function createProductSelectionModal(order) {
         const modal = document.createElement('div');
         modal.className = 'modal';
+
+        // Get actual product details from products array
+        const orderProducts = order.items.map(id =>
+            products.find(p => p.id === id)
+        ).filter(p => p); // Filter out undefined products
+
         modal.innerHTML = `
             <div class="modal-content">
                 <span class="close-modal">&times;</span>
                 <h3>Select a product to review</h3>
                 <div class="product-selection">
-                    ${order.products.map(product => `
+                    ${orderProducts.map(product => `
                         <div class="product-option" data-product-id="${product.id}">
                             <img src="${product.image}" alt="${product.name}">
                             <div>
@@ -607,30 +488,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
         document.body.appendChild(modal);
 
-        // Close modal when clicking X
-        modal.querySelector('.close-modal').addEventListener('click', () => {
-            modal.remove();
-        });
+        // Close modal handlers
+        modal.querySelector('.close-modal').addEventListener('click', () => modal.remove());
+        modal.addEventListener('click', (e) => e.target === modal && modal.remove());
 
-        // Close modal when clicking outside
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.remove();
-            }
-        });
-
-        // Handle product selection
+        // Product selection handler
         modal.querySelectorAll('.product-option').forEach(option => {
             option.addEventListener('click', function () {
-                const productId = parseInt(this.getAttribute('data-product-id'));
+                const productId = parseInt(this.dataset.productId);
                 modal.remove();
-                createReviewForm(productId, order.id);
+                createReviewForm(productId, order.order_id);
             });
         });
     }
 
     function createReviewForm(productId, orderId) {
-        currentProductId = productId;
+        const product = products.find(p => p.id === productId);
+        if (!product) return;
 
         const modal = document.createElement('div');
         modal.className = 'modal';
@@ -661,8 +535,6 @@ document.addEventListener('DOMContentLoaded', function () {
             </div>
         `;
 
-        document.body.appendChild(modal);
-
         // Close modal when clicking X
         modal.querySelector('.close-modal').addEventListener('click', () => {
             modal.remove();
@@ -692,67 +564,42 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
 
-        // Handle form submission
+        // Star rating and form submission logic
         modal.querySelector('#reviewForm').addEventListener('submit', function (e) {
             e.preventDefault();
 
             const rating = parseInt(this.rating.value);
             const reviewText = this.reviewText.value;
 
-            if (rating === 0) {
+            if (!rating) {
                 alert('Please select a rating');
                 return;
             }
 
-            // Find the product in all orders
-            let productToReview;
-            for (const type in ordersData) {
-                for (const order of ordersData[type]) {
-                    if (order.id === orderId) {
-                        productToReview = order.products.find(p => p.id === productId);
-                        if (productToReview) break;
-                    }
-                }
-                if (productToReview) break;
-            }
+            // Add review to the product
+            product.reviews.push({
+                name: userData.name,
+                date: new Date().toISOString().split('T')[0],
+                rating: rating,
+                text: reviewText
+            });
 
-            if (productToReview) {
-                // Add the new review
-                const newReview = {
-                    name: userData.name,
-                    date: new Date().toISOString().split('T')[0], // YYYY-MM-DD format
-                    rating: rating,
-                    text: reviewText
-                };
+            // Update product rating
+            updateProductRating(product);
 
-                if (!productToReview.reviews) {
-                    productToReview.reviews = [];
-                }
+            // Update order status
+            const order = userOrders.find(o => o.order_id === orderId);
+            if (order) order.canReview = false;
 
-                productToReview.reviews.push(newReview);
+            // Refresh orders view
+            const activeTab = document.querySelector('.tab-btn.active');
+            renderOrders(activeTab.dataset.tab);
 
-                // Update the product rating average
-                updateProductRating(productToReview);
-
-                // Mark this order as no longer reviewable
-                for (const type in ordersData) {
-                    const orderIndex = ordersData[type].findIndex(o => o.id === orderId);
-                    if (orderIndex !== -1) {
-                        ordersData[type][orderIndex].canReview = false;
-                        break;
-                    }
-                }
-
-                // Close the modal
-                modal.remove();
-
-                // Re-render the orders to reflect the change
-                const activeTab = document.querySelector('.tab-btn.active');
-                renderOrders(activeTab.getAttribute('data-tab'));
-
-                alert('Thank you for your review!');
-            }
+            modal.remove();
+            alert('Thank you for your review!');
         });
+
+        document.body.appendChild(modal);
     }
 
     function updateProductRating(product) {
@@ -768,79 +615,75 @@ document.addEventListener('DOMContentLoaded', function () {
     // =====================
     // Populate Wishlist
     // =====================
-    const cartCount = document.querySelector('.cart-count');
-
     function populateWishlist() {
         const wishlistContainer = document.getElementById('wishlistItems');
         wishlistContainer.innerHTML = '';
 
-        wishlistData.forEach(item => {
+        wishlistData.forEach(productId => {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
             const wishlistItem = document.createElement('div');
             wishlistItem.className = 'wishlist-item';
-            wishlistItem.dataset.id = item.id;
+            wishlistItem.dataset.id = product.id;
 
-            // Calculate discount if on sale
-            const discountBadge = item.isOnSale
-                ? `<span class="discount-badge">-${item.discountPercentage}%</span>`
+            // Calculate discount if on sale (using PRODUCT instead of ITEM)
+            const discountBadge = product.isOnSale
+                ? `<span class="discount-badge">-${product.discountPercentage}%</span>`
                 : '';
 
-            // Determine which price to show
-            const priceToShow = item.isOnSale ? item.salePrice : item.originalPrice;
-            const originalPriceDisplay = item.isOnSale
-                ? `<span class="original-price">$${item.originalPrice.toFixed(2)}</span>`
+            // Determine which price to show (using PRODUCT)
+            const priceToShow = product.isOnSale ? product.salePrice : product.originalPrice;
+            const originalPriceDisplay = product.isOnSale
+                ? `<span class="original-price">$${product.originalPrice.toFixed(2)}</span>`
                 : '';
 
             wishlistItem.innerHTML = `
-            ${discountBadge}
-            <img src="${item.image}" alt="${item.name}" class="wishlist-image">
-            <div class="wishlist-info">
-                <h3 class="wishlist-name">${item.name}</h3>
-                <div class="wishlist-price">
-                    ${originalPriceDisplay}
-                    $${priceToShow.toFixed(2)}
+                ${discountBadge}
+                <img src="${product.image}" alt="${product.name}" class="wishlist-image">
+                <div class="wishlist-info">
+                    <h3 class="wishlist-name">${product.name}</h3>
+                    <div class="wishlist-price">
+                        ${originalPriceDisplay}
+                        $${priceToShow.toFixed(2)}
+                    </div>
+                    <div class="wishlist-rating">
+                        ${generateStarRating(product.rating)}
+                        <span>(${product.reviews.length})</span>
+                    </div>
                 </div>
-                <div class="wishlist-rating">
-                    ${generateStarRating(item.rating)}
-                    <span>(${item.reviews.length})</span>
+                <div class="wishlist-actions">
+                    <button class="wishlist-remove" title="Remove from wishlist">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                    <button class="wishlist-add">
+                        <i class="fas fa-cart-plus"></i> Add to Cart
+                    </button>
                 </div>
-            </div>
-            <div class="wishlist-actions">
-                <button class="wishlist-remove" title="Remove from wishlist">
-                    <i class="fas fa-trash"></i>
-                </button>
-                <button class="wishlist-add">
-                    <i class="fas fa-cart-plus"></i> Add to Cart
-                </button>
-            </div>
-        `;
+            `;
 
             wishlistContainer.appendChild(wishlistItem);
 
-            // Add click handler to show product details
+            // Event delegation for dynamic elements
+            wishlistItem.querySelector('.wishlist-remove').addEventListener('click', function (e) {
+                e.stopPropagation();
+                removeFromWishlist(product.id);
+            });
+
+            wishlistItem.querySelector('.wishlist-add').addEventListener('click', function (e) {
+                e.stopPropagation();
+                addToCart(product.id);
+            });
+
+            // Product detail click handler
             wishlistItem.addEventListener('click', function (e) {
-                // Don't trigger if clicked on action buttons
                 if (!e.target.closest('.wishlist-actions')) {
-                    const itemId = parseInt(this.dataset.id);
-                    showProductDetails(itemId);
+                    showProductDetails(product.id);
                 }
             });
         });
-
-        // Add event listeners for the buttons
-        document.querySelectorAll('.wishlist-remove').forEach(button => {
-            button.addEventListener('click', function (e) {
-                const itemId = parseInt(this.closest('.wishlist-item').dataset.id);
-                removeFromWishlist(itemId);
-            });
-        });
-
-        document.querySelectorAll('.wishlist-add').forEach(button => {
-            button.addEventListener('click', function (e) {
-                const itemId = parseInt(this.closest('.wishlist-item').dataset.id);
-                addToCart(itemId);
-            });
-        });
     }
+
 
     function generateStarRating(rating) {
         const fullStars = Math.floor(rating);
@@ -860,21 +703,26 @@ document.addEventListener('DOMContentLoaded', function () {
         return stars;
     }
 
+    // Fixed helper functions
     function removeFromWishlist(itemId) {
-        const index = wishlistData.findIndex(item => item.id === itemId);
+        const index = wishlistData.findIndex(id => id === itemId);
         if (index !== -1) {
             wishlistData.splice(index, 1);
             populateWishlist();
-            // In a real app, you would also update the server here
             showToast('Item removed from wishlist');
         }
     }
 
-    function addToCart(itemId, quantity = 1) {
-        const item = wishlistData.find(item => item.id === itemId);
-        if (item) {
-            // In a real app, you would add to cart logic here
-            console.log(`Added ${quantity} of ${item.name} to cart`);
+    // Update cart count
+    const cartCount = document.querySelector('.cart-count');
+
+    function addToCart(itemId) {
+        const product = products.find(p => p.id === itemId);
+        if (product) {
+            // Add actual cart logic here
+
+            cartCount.textContent = parseInt(cartCount.textContent || '0') + 1;
+            showToast(`${product.name} added to cart`);
         }
     }
 
@@ -897,10 +745,17 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function showProductDetails(productId) {
-        const product = wishlistData.find(item => item.id === productId);
+        // Find the product in the products array, not wishlistData
+        const product = products.find(p => p.id === productId);
         if (!product) return;
-    
+
         const popup = document.getElementById('productDetailPopup');
+        if (!popup) {
+            console.error('Popup element not found');
+            return;
+        }
+
+        // Get all popup elements
         const mainImage = document.getElementById('popupMainImage');
         const thumbnailsContainer = document.getElementById('popupThumbnails');
         const productName = document.getElementById('popupProductName');
@@ -908,103 +763,109 @@ document.addEventListener('DOMContentLoaded', function () {
         const productRating = document.getElementById('popupRating');
         const productDescription = document.getElementById('popupDescription');
         const reviewsContainer = document.getElementById('popupReviews');
-    
+
         // Set main product details
-        mainImage.src = product.image;
-        productName.textContent = product.name;
-        
+        if (mainImage) mainImage.src = product.image;
+        if (productName) productName.textContent = product.name;
+
         // Set price with discount if available
-        if (product.isOnSale) {
-            productPrice.innerHTML = `
-                <span class="sale-price">$${product.salePrice.toFixed(2)}</span>
-                <span class="original-price">$${product.originalPrice.toFixed(2)}</span>
-            `;
-        } else {
-            productPrice.innerHTML = `$${product.originalPrice.toFixed(2)}`;
+        if (productPrice) {
+            if (product.isOnSale) {
+                productPrice.innerHTML = `
+                    <span class="sale-price">$${product.salePrice.toFixed(2)}</span>
+                    <span class="original-price">$${product.originalPrice.toFixed(2)}</span>
+                `;
+            } else {
+                productPrice.innerHTML = `$${product.originalPrice.toFixed(2)}`;
+            }
         }
-    
+
         // Set rating
-        productRating.innerHTML = `
-            ${generateStarRating(product.rating)}
-            <span>${product.rating} (${product.reviews.length} reviews)</span>
-        `;
-    
-        // Set description
-        productDescription.textContent = product.description;
-    
-        // Create thumbnails
-        thumbnailsContainer.innerHTML = '';
-        const allImages = [product.image, ...product.thumbnails];
-        allImages.forEach((imgSrc, index) => {
-            const thumb = document.createElement('img');
-            thumb.src = imgSrc;
-            thumb.alt = `${product.name} thumbnail ${index + 1}`;
-            thumb.addEventListener('click', () => {
-                mainImage.src = imgSrc;
-                // Update active thumbnail
-                document.querySelectorAll('#popupThumbnails img').forEach(t => {
-                    t.classList.remove('active-thumbnail');
-                });
-                thumb.classList.add('active-thumbnail');
-            });
-            if (index === 0) thumb.classList.add('active-thumbnail');
-            thumbnailsContainer.appendChild(thumb);
-        });
-    
-        // Create reviews
-        reviewsContainer.innerHTML = '';
-        product.reviews.forEach(review => {
-            const reviewElement = document.createElement('div');
-            reviewElement.className = 'review-item';
-            reviewElement.innerHTML = `
-                <div class="review-header">
-                    <div class="review-author">${review.name}</div>
-                    <div class="review-date">${review.date}</div>
-                    <div class="review-stars">${generateStarRating(review.rating)}</div>
-                </div>
-                <div class="review-text">${review.text}</div>
+        if (productRating) {
+            productRating.innerHTML = `
+                ${generateStarRating(product.rating)}
+                <span>${product.rating} (${product.reviews.length} reviews)</span>
             `;
-            reviewsContainer.appendChild(reviewElement);
-        });
-    
+        }
+
+        // Set description
+        if (productDescription) productDescription.textContent = product.description;
+
+        // Create thumbnails
+        if (thumbnailsContainer) {
+            thumbnailsContainer.innerHTML = '';
+            const allImages = [product.image, ...(product.thumbnails || [])];
+            allImages.forEach((imgSrc, index) => {
+                const thumb = document.createElement('img');
+                thumb.src = imgSrc;
+                thumb.alt = `${product.name} thumbnail ${index + 1}`;
+                thumb.addEventListener('click', () => {
+                    if (mainImage) mainImage.src = imgSrc;
+                    // Update active thumbnail
+                    document.querySelectorAll('#popupThumbnails img').forEach(t => {
+                        t.classList.remove('active-thumbnail');
+                    });
+                    thumb.classList.add('active-thumbnail');
+                });
+                if (index === 0) thumb.classList.add('active-thumbnail');
+                thumbnailsContainer.appendChild(thumb);
+            });
+        }
+
+        // Create reviews
+        if (reviewsContainer) {
+            reviewsContainer.innerHTML = '';
+            product.reviews.forEach(review => {
+                const reviewElement = document.createElement('div');
+                reviewElement.className = 'review-item';
+                reviewElement.innerHTML = `
+                    <div class="review-header">
+                        <div class="review-author">${review.name}</div>
+                        <div class="review-date">${review.date}</div>
+                        <div class="review-stars">${generateStarRating(review.rating)}</div>
+                    </div>
+                    <div class="review-text">${review.text}</div>
+                `;
+                reviewsContainer.appendChild(reviewElement);
+            });
+        }
+
         // Quantity selector functionality
         const quantityInput = document.querySelector('.quantity-input');
-        document.querySelector('.quantity-minus').addEventListener('click', () => {
-            let value = parseInt(quantityInput.value);
-            if (value > 1) {
-                quantityInput.value = value - 1;
-            }
-        });
-        document.querySelector('.quantity-plus').addEventListener('click', () => {
-            let value = parseInt(quantityInput.value);
-            quantityInput.value = value + 1;
-        });
-    
+        if (quantityInput) {
+            document.querySelector('.quantity-minus')?.addEventListener('click', () => {
+                let value = parseInt(quantityInput.value);
+                if (value > 1) {
+                    quantityInput.value = value - 1;
+                }
+            });
+
+            document.querySelector('.quantity-plus')?.addEventListener('click', () => {
+                let value = parseInt(quantityInput.value);
+                quantityInput.value = value + 1;
+            });
+        }
+
         // Add to cart button
-        document.querySelector('.add-to-cart-btn').addEventListener('click', () => {
-            const quantity = parseInt(quantityInput.value);
+        document.querySelector('.add-to-cart-btn')?.addEventListener('click', () => {
+            const quantity = parseInt(quantityInput?.value || 1);
             addToCart(product.id, quantity);
             showToast(`${product.name} (${quantity}) added to cart`);
         });
-    
+
         // Close button
-        document.querySelector('.close-popup').addEventListener('click', () => {
+        document.querySelector('.close-popup')?.addEventListener('click', () => {
             popup.style.display = 'none';
         });
 
-        document.querySelector('.popup-overlay').addEventListener('click', () => {
+        document.querySelector('.popup-overlay')?.addEventListener('click', () => {
             popup.style.display = 'none';
         });
-    
+
         // Show the popup
         popup.style.display = 'flex';
     }
 
     // Initialize the wishlist
     populateWishlist();
-
-    // =====================
-    // Popout product
-    // =====================
-
 });

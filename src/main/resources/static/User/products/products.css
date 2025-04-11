@@ -699,20 +699,20 @@ body.dark-theme {
     background-color: var(--secondary-dark);
 }
 
-/* Footer */
-.footer {
+/* my-footer */
+.my-footer {
     background-color: var(--primary-light);
     color: var(--text-light);
     padding: 3rem 0 1rem;
     transition: var(--transition);
 }
 
-.dark-theme .footer {
+.dark-theme .my-footer {
     background-color: var(--primary-dark);
     color: var(--text-dark);
 }
 
-.footer-container {
+.my-footer-container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 2rem;
@@ -721,70 +721,70 @@ body.dark-theme {
     gap: 2rem;
 }
 
-.footer-logo img {
+.my-footer-logo img {
     height: 40px;
     margin-bottom: 1rem;
 }
 
-.footer-logo p {
+.my-footer-logo p {
     font-style: italic;
     font-size: 0.9rem;
 }
 
-.footer-links h3, .footer-contact h3 {
+.my-footer-links h3, .my-footer-contact h3 {
     margin-bottom: 1rem;
     font-size: 1.1rem;
     color: var(--secondary-light);
 }
 
-.dark-theme .footer-links h3,
-.dark-theme .footer-contact h3 {
+.dark-theme .my-footer-links h3,
+.dark-theme .my-footer-contact h3 {
     color: var(--secondary-dark);
 }
 
-.footer-links ul {
+.my-footer-links ul {
     list-style: none;
 }
 
-.footer-links li {
+.my-footer-links li {
     margin-bottom: 0.5rem;
 }
 
-.footer-links a {
+.my-footer-links a {
     color: var(--text-light);
     text-decoration: none;
     transition: var(--transition);
 }
 
-.dark-theme .footer-links a {
+.dark-theme .my-footer-links a {
     color: var(--text-dark);
 }
 
-.footer-links a:hover {
+.my-footer-links a:hover {
     color: var(--secondary-light);
     text-decoration: underline;
 }
 
-.dark-theme .footer-links a:hover {
+.dark-theme .my-footer-links a:hover {
     color: var(--secondary-dark);
 }
 
-.footer-contact p {
+.my-footer-contact p {
     margin-bottom: 0.5rem;
     display: flex;
     align-items: center;
     gap: 0.5rem;
 }
 
-.footer-contact i {
+.my-footer-contact i {
     color: var(--secondary-light);
 }
 
-.dark-theme .footer-contact i {
+.dark-theme .my-footer-contact i {
     color: var(--secondary-dark);
 }
 
-.footer-bottom {
+.my-footer-bottom {
     text-align: center;
     padding-top: 2rem;
     margin-top: 2rem;
@@ -792,7 +792,7 @@ body.dark-theme {
     font-size: 0.8rem;
 }
 
-.dark-theme .footer-bottom {
+.dark-theme .my-footer-bottom {
     border-top-color: #444;
 }
 

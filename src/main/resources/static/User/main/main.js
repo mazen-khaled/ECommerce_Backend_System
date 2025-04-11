@@ -1,5 +1,179 @@
 let currentProductId;
 
+// =============================================
+// Data Setup
+// =============================================
+const categories = [
+    {
+        id: 1,
+        name: "Living Room",
+        image: "https://st.hzcdn.com/simgs/23d10aba05948770_9-2874/home-design.jpg",
+        productCount: 45
+    },
+    {
+        id: 2,
+        name: "Bedroom",
+        image: "https://cdn.shopify.com/s/files/1/0044/1208/0217/files/Mozart_16721e45-a1b5-4c99-907a-8fc634c73955_900x.jpg?v=1728031247",
+        productCount: 32
+    },
+    {
+        id: 3,
+        name: "Kitchen",
+        image: "https://www.tomhowley.co.uk/wp-content/uploads/TH076_Foxton_20_feature.jpg",
+        productCount: 28
+    },
+    {
+        id: 4,
+        name: "Office",
+        image: "https://hips.hearstapps.com/hmg-prod/images/alan-design-edit2-1505749166.jpg?crop=1xw:1xh;center,top&resize=980:*",
+        productCount: 19
+    }
+];
+
+const onSaleProducts = [
+    {
+        id: 101,
+        name: "Modern Leather Sofa",
+        category: "Living Room",
+        originalPrice: 1299.99,
+        salePrice: 899.99,
+        image: "https://media.istockphoto.com/id/1068258892/photo/real-photo-of-a-leather-couch-in-a-living-room-interior.jpg?s=612x612&w=0&k=20&c=BroDHN5n3pk0HIvKTxCksciT1ZhoodzuCgcxQzmAUPc=",
+        thumbnails: [
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSstIz5iT-l_x2vjfGmUyEQ17yOT5xgr03og&s",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ9TbqQJt4UtqlFf7S7ZSvWzq_vZjlMmTADQ&s",
+            "https://media.istockphoto.com/id/1068258892/photo/real-photo-of-a-leather-couch-in-a-living-room-interior.jpg?s=612x612&w=0&k=20&c=BroDHN5n3pk0HIvKTxCksciT1ZhoodzuCgcxQzmAUPc=",
+            "https://www.elhelowgroup.com/wp-content/uploads/2023/06/york-sofa-elhelow-group-6-600x400.jpg"
+        ],
+        description: "High quality modern leather sofa for your living room.",
+        rating: 4.7,
+        reviews: [
+            {
+                name: "Ali",
+                date: "2025-04-01",
+                rating: 5,
+                text: "Absolutely love it!"
+            },
+            {
+                name: "Nora",
+                date: "2025-03-20",
+                rating: 4,
+                text: "Stylish and comfy."
+            }
+        ],
+        isNew: false,
+        isBestSeller: false,
+        isOnSale: true,
+        discountPercentage: 20,
+    },
+    {
+        id: 102,
+        name: "Marble Coffee Table",
+        category: "Living Room",
+        originalPrice: 499.99,
+        salePrice: 299.99,
+        image: "https://assets.pbimgs.com/pbimgs/rk/images/dp/wcm/202502/0087/chapman-oval-marble-coffee-table-52-o.jpg",
+        thumbnails: [
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSstIz5iT-l_x2vjfGmUyEQ17yOT5xgr03og&s",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ9TbqQJt4UtqlFf7S7ZSvWzq_vZjlMmTADQ&s",
+            "https://media.istockphoto.com/id/1068258892/photo/real-photo-of-a-leather-couch-in-a-living-room-interior.jpg?s=612x612&w=0&k=20&c=BroDHN5n3pk0HIvKTxCksciT1ZhoodzuCgcxQzmAUPc=",
+            "https://www.elhelowgroup.com/wp-content/uploads/2023/06/york-sofa-elhelow-group-6-600x400.jpg"
+        ],
+        description: "High quality modern leather sofa for your living room.",
+        rating: 4.7,
+        reviews: [
+            {
+                name: "Ali",
+                date: "2025-04-01",
+                rating: 5,
+                text: "Absolutely love it!"
+            },
+            {
+                name: "Nora",
+                date: "2025-03-20",
+                rating: 4,
+                text: "Stylish and comfy."
+            }
+        ],
+        isNew: false,
+        isBestSeller: false,
+        isOnSale: true,
+        discountPercentage: 20,
+    },
+];
+
+const bestSellers = [
+    {
+        id: 201,
+        name: "King Size Bed Frame",
+        category: "Bedroom",
+        originalPrice: 0,
+        salePrice: 12000,
+        image: "https://m.media-amazon.com/images/I/81g++w1J0qL.jpg",
+        thumbnails: [
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSstIz5iT-l_x2vjfGmUyEQ17yOT5xgr03og&s",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ9TbqQJt4UtqlFf7S7ZSvWzq_vZjlMmTADQ&s",
+            "https://media.istockphoto.com/id/1068258892/photo/real-photo-of-a-leather-couch-in-a-living-room-interior.jpg?s=612x612&w=0&k=20&c=BroDHN5n3pk0HIvKTxCksciT1ZhoodzuCgcxQzmAUPc=",
+            "https://www.elhelowgroup.com/wp-content/uploads/2023/06/york-sofa-elhelow-group-6-600x400.jpg"
+        ],
+        description: "High quality modern leather sofa for your living room.",
+        rating: 4.7,
+        reviews: [
+            {
+                name: "Ali",
+                date: "2025-04-01",
+                rating: 5,
+                text: "Absolutely love it!"
+            },
+            {
+                name: "Nora",
+                date: "2025-03-20",
+                rating: 4,
+                text: "Stylish and comfy."
+            }
+        ],
+        isNew: false,
+        isBestSeller: true,
+        isOnSale: false,
+        discountPercentage: 0,
+    },
+    {
+        id: 202,
+        name: "Dining Table Set",
+        category: "Kitchen",
+        originalPrice: 0,
+        salePrice: 770,
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzMe54OPO1xfJdLqgXnaz_d6yGYMiaygynCQ&s",
+        thumbnails: [
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSstIz5iT-l_x2vjfGmUyEQ17yOT5xgr03og&s",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ9TbqQJt4UtqlFf7S7ZSvWzq_vZjlMmTADQ&s",
+            "https://media.istockphoto.com/id/1068258892/photo/real-photo-of-a-leather-couch-in-a-living-room-interior.jpg?s=612x612&w=0&k=20&c=BroDHN5n3pk0HIvKTxCksciT1ZhoodzuCgcxQzmAUPc=",
+            "https://www.elhelowgroup.com/wp-content/uploads/2023/06/york-sofa-elhelow-group-6-600x400.jpg"
+        ],
+        description: "High quality modern leather sofa for your living room.",
+        rating: 4.7,
+        reviews: [
+            {
+                name: "Ali",
+                date: "2025-04-01",
+                rating: 5,
+                text: "Absolutely love it!"
+            },
+            {
+                name: "Nora",
+                date: "2025-03-20",
+                rating: 4,
+                text: "Stylish and comfy."
+            }
+        ],
+        isNew: false,
+        isBestSeller: true,
+        isOnSale: false,
+        discountPercentage: 0,
+    },
+];
+
+const allProducts = [...onSaleProducts, ...bestSellers];
+
 document.addEventListener('DOMContentLoaded', function () {
     // =============================================
     // Theme Setup
@@ -31,180 +205,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // =============================================
-    // Data Setup
-    // =============================================
-    const categories = [
-        {
-            id: 1,
-            name: "Living Room",
-            image: "https://st.hzcdn.com/simgs/23d10aba05948770_9-2874/home-design.jpg",
-            productCount: 45
-        },
-        {
-            id: 2,
-            name: "Bedroom",
-            image: "https://cdn.shopify.com/s/files/1/0044/1208/0217/files/Mozart_16721e45-a1b5-4c99-907a-8fc634c73955_900x.jpg?v=1728031247",
-            productCount: 32
-        },
-        {
-            id: 3,
-            name: "Kitchen",
-            image: "https://www.tomhowley.co.uk/wp-content/uploads/TH076_Foxton_20_feature.jpg",
-            productCount: 28
-        },
-        {
-            id: 4,
-            name: "Office",
-            image: "https://hips.hearstapps.com/hmg-prod/images/alan-design-edit2-1505749166.jpg?crop=1xw:1xh;center,top&resize=980:*",
-            productCount: 19
-        }
-    ];
-
-    const onSaleProducts = [
-        {
-            id: 101,
-            name: "Modern Leather Sofa",
-            category: "Living Room",
-            originalPrice: 1299.99,
-            salePrice: 899.99,
-            image: "https://media.istockphoto.com/id/1068258892/photo/real-photo-of-a-leather-couch-in-a-living-room-interior.jpg?s=612x612&w=0&k=20&c=BroDHN5n3pk0HIvKTxCksciT1ZhoodzuCgcxQzmAUPc=",
-            thumbnails: [
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSstIz5iT-l_x2vjfGmUyEQ17yOT5xgr03og&s",
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ9TbqQJt4UtqlFf7S7ZSvWzq_vZjlMmTADQ&s",
-                "https://media.istockphoto.com/id/1068258892/photo/real-photo-of-a-leather-couch-in-a-living-room-interior.jpg?s=612x612&w=0&k=20&c=BroDHN5n3pk0HIvKTxCksciT1ZhoodzuCgcxQzmAUPc=",
-                "https://www.elhelowgroup.com/wp-content/uploads/2023/06/york-sofa-elhelow-group-6-600x400.jpg"
-            ],
-            description: "High quality modern leather sofa for your living room.",
-            rating: 4.7,
-            reviews: [
-                {
-                    name: "Ali",
-                    date: "2025-04-01",
-                    rating: 5,
-                    text: "Absolutely love it!"
-                },
-                {
-                    name: "Nora",
-                    date: "2025-03-20",
-                    rating: 4,
-                    text: "Stylish and comfy."
-                }
-            ],
-            isNew: false,
-            isBestSeller: false,
-            isOnSale: true,
-            discountPercentage: 20,
-        },
-        {
-            id: 102,
-            name: "Marble Coffee Table",
-            category: "Living Room",
-            originalPrice: 499.99,
-            salePrice: 299.99,
-            image: "https://assets.pbimgs.com/pbimgs/rk/images/dp/wcm/202502/0087/chapman-oval-marble-coffee-table-52-o.jpg",
-            thumbnails: [
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSstIz5iT-l_x2vjfGmUyEQ17yOT5xgr03og&s",
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ9TbqQJt4UtqlFf7S7ZSvWzq_vZjlMmTADQ&s",
-                "https://media.istockphoto.com/id/1068258892/photo/real-photo-of-a-leather-couch-in-a-living-room-interior.jpg?s=612x612&w=0&k=20&c=BroDHN5n3pk0HIvKTxCksciT1ZhoodzuCgcxQzmAUPc=",
-                "https://www.elhelowgroup.com/wp-content/uploads/2023/06/york-sofa-elhelow-group-6-600x400.jpg"
-            ],
-            description: "High quality modern leather sofa for your living room.",
-            rating: 4.7,
-            reviews: [
-                {
-                    name: "Ali",
-                    date: "2025-04-01",
-                    rating: 5,
-                    text: "Absolutely love it!"
-                },
-                {
-                    name: "Nora",
-                    date: "2025-03-20",
-                    rating: 4,
-                    text: "Stylish and comfy."
-                }
-            ],
-            isNew: false,
-            isBestSeller: false,
-            isOnSale: true,
-            discountPercentage: 20,
-        },
-    ];
-
-    const bestSellers = [
-        {
-            id: 201,
-            name: "King Size Bed Frame",
-            category: "Bedroom",
-            originalPrice: 0,
-            salePrice: 12000,
-            image: "https://m.media-amazon.com/images/I/81g++w1J0qL.jpg",
-            thumbnails: [
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSstIz5iT-l_x2vjfGmUyEQ17yOT5xgr03og&s",
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ9TbqQJt4UtqlFf7S7ZSvWzq_vZjlMmTADQ&s",
-                "https://media.istockphoto.com/id/1068258892/photo/real-photo-of-a-leather-couch-in-a-living-room-interior.jpg?s=612x612&w=0&k=20&c=BroDHN5n3pk0HIvKTxCksciT1ZhoodzuCgcxQzmAUPc=",
-                "https://www.elhelowgroup.com/wp-content/uploads/2023/06/york-sofa-elhelow-group-6-600x400.jpg"
-            ],
-            description: "High quality modern leather sofa for your living room.",
-            rating: 4.7,
-            reviews: [
-                {
-                    name: "Ali",
-                    date: "2025-04-01",
-                    rating: 5,
-                    text: "Absolutely love it!"
-                },
-                {
-                    name: "Nora",
-                    date: "2025-03-20",
-                    rating: 4,
-                    text: "Stylish and comfy."
-                }
-            ],
-            isNew: false,
-            isBestSeller: true,
-            isOnSale: false,
-            discountPercentage: 0,
-        },
-        {
-            id: 202,
-            name: "Dining Table Set",
-            category: "Kitchen",
-            originalPrice: 0,
-            salePrice: 770,
-            image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzMe54OPO1xfJdLqgXnaz_d6yGYMiaygynCQ&s",
-            thumbnails: [
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSstIz5iT-l_x2vjfGmUyEQ17yOT5xgr03og&s",
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ9TbqQJt4UtqlFf7S7ZSvWzq_vZjlMmTADQ&s",
-                "https://media.istockphoto.com/id/1068258892/photo/real-photo-of-a-leather-couch-in-a-living-room-interior.jpg?s=612x612&w=0&k=20&c=BroDHN5n3pk0HIvKTxCksciT1ZhoodzuCgcxQzmAUPc=",
-                "https://www.elhelowgroup.com/wp-content/uploads/2023/06/york-sofa-elhelow-group-6-600x400.jpg"
-            ],
-            description: "High quality modern leather sofa for your living room.",
-            rating: 4.7,
-            reviews: [
-                {
-                    name: "Ali",
-                    date: "2025-04-01",
-                    rating: 5,
-                    text: "Absolutely love it!"
-                },
-                {
-                    name: "Nora",
-                    date: "2025-03-20",
-                    rating: 4,
-                    text: "Stylish and comfy."
-                }
-            ],
-            isNew: false,
-            isBestSeller: true,
-            isOnSale: false,
-            discountPercentage: 0,
-        },
-    ];
-
-    const allProducts = [...onSaleProducts, ...bestSellers];
-
-    // =============================================
     // DOM Elements
     // =============================================
     const domElements = {
@@ -228,14 +228,14 @@ document.addEventListener('DOMContentLoaded', function () {
     // =============================================
     function initializeStore() {
         initializeTheme();
-    
+
         // Check if we're on a category page
         if (window.location.pathname.includes('special-category.html')) {
             initCategoryPage();
         } else {
             renderAllSections();
         }
-        
+
         setupEventListeners();
     }
 

@@ -1,3 +1,297 @@
+// =============================================
+// Data Setup
+// =============================================
+const rooms = [
+    { id: 'living-room', name: 'Living Room' },
+    { id: 'bedroom', name: 'Bedroom' },
+    { id: 'kitchen', name: 'Kitchen' },
+    { id: 'office', name: 'Office' },
+    { id: 'dining-room', name: 'Dining Room' }
+];
+
+const products = [
+    {
+        id: 101,
+        name: "Modern Leather Sofa",
+        room: "living-room",
+        category: "Sofas",
+        originalPrice: 1299.99,
+        salePrice: 299.99,
+        image: "https://articture.com/cdn/shop/files/image_4_a1d732f9-f198-427b-b04b-4f9074fb338b_800x.jpg?v=1695745828",
+        thumbnails: [
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSstIz5iT-l_x2vjfGmUyEQ17yOT5xgr03og&s",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ9TbqQJt4UtqlFf7S7ZSvWzq_vZjlMmTADQ&s",
+            "https://media.istockphoto.com/id/1068258892/photo/real-photo-of-a-leather-couch-in-a-living-room-interior.jpg?s=612x612&w=0&k=20&c=BroDHN5n3pk0HIvKTxCksciT1ZhoodzuCgcxQzmAUPc=",
+            "https://www.elhelowgroup.com/wp-content/uploads/2023/06/york-sofa-elhelow-group-6-600x400.jpg"
+        ],
+        description: "High quality modern leather sofa for your living room.",
+        rating: 4.7,
+        reviews: [
+            {
+                name: "Ali",
+                date: "2025-04-01",
+                rating: 5,
+                text: "Absolutely love it!"
+            },
+            {
+                name: "Nora",
+                date: "2025-03-20",
+                rating: 4,
+                text: "Stylish and comfy."
+            }
+        ],
+        isNew: true,
+        isBestSeller: false,
+        isOnSale: false,
+        discountPercentage: 0,
+    },
+    {
+        id: 102,
+        name: "Leather Sofa",
+        room: "living-room",
+        category: "Sofas",
+        originalPrice: 3000.99,
+        salePrice: 1299.99,
+        image: "https://articture.com/cdn/shop/files/image_4_a1d732f9-f198-427b-b04b-4f9074fb338b_800x.jpg?v=1695745828",
+        thumbnails: [
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSstIz5iT-l_x2vjfGmUyEQ17yOT5xgr03og&s",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ9TbqQJt4UtqlFf7S7ZSvWzq_vZjlMmTADQ&s",
+            "https://media.istockphoto.com/id/1068258892/photo/real-photo-of-a-leather-couch-in-a-living-room-interior.jpg?s=612x612&w=0&k=20&c=BroDHN5n3pk0HIvKTxCksciT1ZhoodzuCgcxQzmAUPc=",
+            "https://www.elhelowgroup.com/wp-content/uploads/2023/06/york-sofa-elhelow-group-6-600x400.jpg"
+        ],
+        description: "High quality modern leather sofa for your living room.",
+        rating: 4.7,
+        reviews: [
+            {
+                name: "Ali",
+                date: "2025-04-01",
+                rating: 5,
+                text: "Absolutely love it!"
+            },
+            {
+                name: "Nora",
+                date: "2025-03-20",
+                rating: 4,
+                text: "Stylish and comfy."
+            }
+        ],
+        isNew: false,
+        isBestSeller: false,
+        isOnSale: true,
+        discountPercentage: 20,
+    },
+    {
+        id: 103,
+        name: "Modern Leather Sofa",
+        category: "Sofas",
+        room: "living-room",
+        originalPrice: 1624.99,
+        salePrice: 1299.99,
+        image: "https://articture.com/cdn/shop/files/image_4_a1d732f9-f198-427b-b04b-4f9074fb338b_800x.jpg?v=1695745828",
+        thumbnails: [
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSstIz5iT-l_x2vjfGmUyEQ17yOT5xgr03og&s",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ9TbqQJt4UtqlFf7S7ZSvWzq_vZjlMmTADQ&s",
+            "https://media.istockphoto.com/id/1068258892/photo/real-photo-of-a-leather-couch-in-a-living-room-interior.jpg?s=612x612&w=0&k=20&c=BroDHN5n3pk0HIvKTxCksciT1ZhoodzuCgcxQzmAUPc=",
+            "https://www.elhelowgroup.com/wp-content/uploads/2023/06/york-sofa-elhelow-group-6-600x400.jpg"
+        ],
+        description: "High quality modern leather sofa for your living room.",
+        rating: 4.7,
+        reviews: [
+            {
+                name: "Ali",
+                date: "2025-04-01",
+                rating: 5,
+                text: "Absolutely love it!"
+            },
+            {
+                name: "Nora",
+                date: "2025-03-20",
+                rating: 4,
+                text: "Stylish and comfy."
+            }
+        ],
+        isNew: false,
+        isBestSeller: true,
+        isOnSale: false,
+        discountPercentage: 0,
+    },
+    {
+        id: 201,
+        name: "King Size Bed Frame",
+        room: "bedroom",
+        category: "Beds",
+        originalPrice: 1624.99,
+        salePrice: 1299.99,
+        image: "https://eg-rv.homzmart.net/catalog/product/e/n/eng.fur.36-2_1.jpg",
+        thumbnails: [
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSstIz5iT-l_x2vjfGmUyEQ17yOT5xgr03og&s",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ9TbqQJt4UtqlFf7S7ZSvWzq_vZjlMmTADQ&s",
+            "https://media.istockphoto.com/id/1068258892/photo/real-photo-of-a-leather-couch-in-a-living-room-interior.jpg?s=612x612&w=0&k=20&c=BroDHN5n3pk0HIvKTxCksciT1ZhoodzuCgcxQzmAUPc=",
+            "https://www.elhelowgroup.com/wp-content/uploads/2023/06/york-sofa-elhelow-group-6-600x400.jpg"
+        ],
+        description: "High quality modern leather sofa for your living room.",
+        rating: 4.7,
+        reviews: [
+            {
+                name: "Ali",
+                date: "2025-04-01",
+                rating: 5,
+                text: "Absolutely love it!"
+            },
+            {
+                name: "Nora",
+                date: "2025-03-20",
+                rating: 4,
+                text: "Stylish and comfy."
+            }
+        ],
+        isNew: true,
+        isBestSeller: false,
+        isOnSale: true,
+        discountPercentage: 20,
+    },
+    {
+        id: 202,
+        name: "King Size Bed Frame",
+        room: "bedroom",
+        category: "Beds",
+        originalPrice: 1624.99,
+        salePrice: 1299.99,
+        image: "https://eg-rv.homzmart.net/catalog/product/e/n/eng.fur.36-2_1.jpg",
+        thumbnails: [
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSstIz5iT-l_x2vjfGmUyEQ17yOT5xgr03og&s",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ9TbqQJt4UtqlFf7S7ZSvWzq_vZjlMmTADQ&s",
+            "https://media.istockphoto.com/id/1068258892/photo/real-photo-of-a-leather-couch-in-a-living-room-interior.jpg?s=612x612&w=0&k=20&c=BroDHN5n3pk0HIvKTxCksciT1ZhoodzuCgcxQzmAUPc=",
+            "https://www.elhelowgroup.com/wp-content/uploads/2023/06/york-sofa-elhelow-group-6-600x400.jpg"
+        ],
+        description: "High quality modern leather sofa for your living room.",
+        rating: 4.7,
+        reviews: [
+            {
+                name: "Ali",
+                date: "2025-04-01",
+                rating: 5,
+                text: "Absolutely love it!"
+            },
+            {
+                name: "Nora",
+                date: "2025-03-20",
+                rating: 4,
+                text: "Stylish and comfy."
+            }
+        ],
+        isNew: true,
+        isBestSeller: true,
+        isOnSale: true,
+        discountPercentage: 20,
+    },
+    {
+        id: 202,
+        name: "King Size Bed Frame",
+        room: "kitchen",
+        category: "Beds",
+        originalPrice: 1624.99,
+        salePrice: 1299.99,
+        image: "https://eg-rv.homzmart.net/catalog/product/e/n/eng.fur.36-2_1.jpg",
+        thumbnails: [
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSstIz5iT-l_x2vjfGmUyEQ17yOT5xgr03og&s",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ9TbqQJt4UtqlFf7S7ZSvWzq_vZjlMmTADQ&s",
+            "https://media.istockphoto.com/id/1068258892/photo/real-photo-of-a-leather-couch-in-a-living-room-interior.jpg?s=612x612&w=0&k=20&c=BroDHN5n3pk0HIvKTxCksciT1ZhoodzuCgcxQzmAUPc=",
+            "https://www.elhelowgroup.com/wp-content/uploads/2023/06/york-sofa-elhelow-group-6-600x400.jpg"
+        ],
+        description: "High quality modern leather sofa for your living room.",
+        rating: 4.7,
+        reviews: [
+            {
+                name: "Ali",
+                date: "2025-04-01",
+                rating: 5,
+                text: "Absolutely love it!"
+            },
+            {
+                name: "Nora",
+                date: "2025-03-20",
+                rating: 4,
+                text: "Stylish and comfy."
+            }
+        ],
+        isNew: true,
+        isBestSeller: true,
+        isOnSale: true,
+        discountPercentage: 20,
+    },
+    {
+        id: 202,
+        name: "King Size Bed Frame",
+        room: "office",
+        category: "Beds",
+        originalPrice: 1624.99,
+        salePrice: 1299.99,
+        image: "https://eg-rv.homzmart.net/catalog/product/e/n/eng.fur.36-2_1.jpg",
+        thumbnails: [
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSstIz5iT-l_x2vjfGmUyEQ17yOT5xgr03og&s",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ9TbqQJt4UtqlFf7S7ZSvWzq_vZjlMmTADQ&s",
+            "https://media.istockphoto.com/id/1068258892/photo/real-photo-of-a-leather-couch-in-a-living-room-interior.jpg?s=612x612&w=0&k=20&c=BroDHN5n3pk0HIvKTxCksciT1ZhoodzuCgcxQzmAUPc=",
+            "https://www.elhelowgroup.com/wp-content/uploads/2023/06/york-sofa-elhelow-group-6-600x400.jpg"
+        ],
+        description: "High quality modern leather sofa for your living room.",
+        rating: 4.7,
+        reviews: [
+            {
+                name: "Ali",
+                date: "2025-04-01",
+                rating: 5,
+                text: "Absolutely love it!"
+            },
+            {
+                name: "Nora",
+                date: "2025-03-20",
+                rating: 4,
+                text: "Stylish and comfy."
+            }
+        ],
+        isNew: true,
+        isBestSeller: true,
+        isOnSale: true,
+        discountPercentage: 20,
+    },
+    {
+        id: 202,
+        name: "King Size Bed Frame",
+        room: "dining-room",
+        category: "Beds",
+        originalPrice: 1624.99,
+        salePrice: 1299.99,
+        image: "https://eg-rv.homzmart.net/catalog/product/e/n/eng.fur.36-2_1.jpg",
+        thumbnails: [
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSstIz5iT-l_x2vjfGmUyEQ17yOT5xgr03og&s",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ9TbqQJt4UtqlFf7S7ZSvWzq_vZjlMmTADQ&s",
+            "https://media.istockphoto.com/id/1068258892/photo/real-photo-of-a-leather-couch-in-a-living-room-interior.jpg?s=612x612&w=0&k=20&c=BroDHN5n3pk0HIvKTxCksciT1ZhoodzuCgcxQzmAUPc=",
+            "https://www.elhelowgroup.com/wp-content/uploads/2023/06/york-sofa-elhelow-group-6-600x400.jpg"
+        ],
+        description: "High quality modern leather sofa for your living room.",
+        rating: 4.7,
+        reviews: [
+            {
+                name: "Ali",
+                date: "2025-04-01",
+                rating: 5,
+                text: "Absolutely love it!"
+            },
+            {
+                name: "Nora",
+                date: "2025-03-20",
+                rating: 4,
+                text: "Stylish and comfy."
+            }
+        ],
+        isNew: true,
+        isBestSeller: true,
+        isOnSale: true,
+        discountPercentage: 20,
+    }
+];
+
 document.addEventListener('DOMContentLoaded', function () {
     // =============================================
     // Theme Setup
@@ -29,194 +323,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // =============================================
-    // Data Setup
-    // =============================================
-    const rooms = [
-        { id: 'living-room', name: 'Living Room' },
-        { id: 'bedroom', name: 'Bedroom' },
-        { id: 'kitchen', name: 'Kitchen' },
-        { id: 'office', name: 'Office' },
-        { id: 'dining-room', name: 'Dining Room' }
-    ];
-
-    const allProducts = {
-        'living-room': [
-            {
-                id: 101,
-                name: "Modern Leather Sofa",
-                category: "Sofas",
-                originalPrice: 1299.99,
-                salePrice: 299.99,
-                image: "https://articture.com/cdn/shop/files/image_4_a1d732f9-f198-427b-b04b-4f9074fb338b_800x.jpg?v=1695745828",
-                thumbnails: [
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSstIz5iT-l_x2vjfGmUyEQ17yOT5xgr03og&s",
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ9TbqQJt4UtqlFf7S7ZSvWzq_vZjlMmTADQ&s",
-                    "https://media.istockphoto.com/id/1068258892/photo/real-photo-of-a-leather-couch-in-a-living-room-interior.jpg?s=612x612&w=0&k=20&c=BroDHN5n3pk0HIvKTxCksciT1ZhoodzuCgcxQzmAUPc=",
-                    "https://www.elhelowgroup.com/wp-content/uploads/2023/06/york-sofa-elhelow-group-6-600x400.jpg"
-                ],
-                description: "High quality modern leather sofa for your living room.",
-                rating: 4.7,
-                reviews: [
-                    {
-                        name: "Ali",
-                        date: "2025-04-01",
-                        rating: 5,
-                        text: "Absolutely love it!"
-                    },
-                    {
-                        name: "Nora",
-                        date: "2025-03-20",
-                        rating: 4,
-                        text: "Stylish and comfy."
-                    }
-                ],
-                isNew: true,
-                isBestSeller: false,
-                isOnSale: false,
-                discountPercentage: 0,
-            },
-            {
-                id: 102,
-                name: "Leather Sofa",
-                category: "Sofas",
-                originalPrice: 3000.99,
-                salePrice: 1299.99,
-                image: "https://articture.com/cdn/shop/files/image_4_a1d732f9-f198-427b-b04b-4f9074fb338b_800x.jpg?v=1695745828",
-                thumbnails: [
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSstIz5iT-l_x2vjfGmUyEQ17yOT5xgr03og&s",
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ9TbqQJt4UtqlFf7S7ZSvWzq_vZjlMmTADQ&s",
-                    "https://media.istockphoto.com/id/1068258892/photo/real-photo-of-a-leather-couch-in-a-living-room-interior.jpg?s=612x612&w=0&k=20&c=BroDHN5n3pk0HIvKTxCksciT1ZhoodzuCgcxQzmAUPc=",
-                    "https://www.elhelowgroup.com/wp-content/uploads/2023/06/york-sofa-elhelow-group-6-600x400.jpg"
-                ],
-                description: "High quality modern leather sofa for your living room.",
-                rating: 4.7,
-                reviews: [
-                    {
-                        name: "Ali",
-                        date: "2025-04-01",
-                        rating: 5,
-                        text: "Absolutely love it!"
-                    },
-                    {
-                        name: "Nora",
-                        date: "2025-03-20",
-                        rating: 4,
-                        text: "Stylish and comfy."
-                    }
-                ],
-                isNew: false,
-                isBestSeller: false,
-                isOnSale: true,
-                discountPercentage: 20,
-            },
-            {
-                id: 103,
-                name: "Modern Leather Sofa",
-                category: "Sofas",
-                originalPrice: 1624.99,
-                salePrice: 1299.99,
-                image: "https://articture.com/cdn/shop/files/image_4_a1d732f9-f198-427b-b04b-4f9074fb338b_800x.jpg?v=1695745828",
-                thumbnails: [
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSstIz5iT-l_x2vjfGmUyEQ17yOT5xgr03og&s",
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ9TbqQJt4UtqlFf7S7ZSvWzq_vZjlMmTADQ&s",
-                    "https://media.istockphoto.com/id/1068258892/photo/real-photo-of-a-leather-couch-in-a-living-room-interior.jpg?s=612x612&w=0&k=20&c=BroDHN5n3pk0HIvKTxCksciT1ZhoodzuCgcxQzmAUPc=",
-                    "https://www.elhelowgroup.com/wp-content/uploads/2023/06/york-sofa-elhelow-group-6-600x400.jpg"
-                ],
-                description: "High quality modern leather sofa for your living room.",
-                rating: 4.7,
-                reviews: [
-                    {
-                        name: "Ali",
-                        date: "2025-04-01",
-                        rating: 5,
-                        text: "Absolutely love it!"
-                    },
-                    {
-                        name: "Nora",
-                        date: "2025-03-20",
-                        rating: 4,
-                        text: "Stylish and comfy."
-                    }
-                ],
-                isNew: false,
-                isBestSeller: true,
-                isOnSale: false,
-                discountPercentage: 0,
-            },
-        ],
-        'bedroom': [
-            {
-                id: 201,
-                name: "King Size Bed Frame",
-                category: "Beds",
-                originalPrice: 1624.99,
-                salePrice: 1299.99,
-                image: "https://eg-rv.homzmart.net/catalog/product/e/n/eng.fur.36-2_1.jpg",
-                thumbnails: [
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSstIz5iT-l_x2vjfGmUyEQ17yOT5xgr03og&s",
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ9TbqQJt4UtqlFf7S7ZSvWzq_vZjlMmTADQ&s",
-                    "https://media.istockphoto.com/id/1068258892/photo/real-photo-of-a-leather-couch-in-a-living-room-interior.jpg?s=612x612&w=0&k=20&c=BroDHN5n3pk0HIvKTxCksciT1ZhoodzuCgcxQzmAUPc=",
-                    "https://www.elhelowgroup.com/wp-content/uploads/2023/06/york-sofa-elhelow-group-6-600x400.jpg"
-                ],
-                description: "High quality modern leather sofa for your living room.",
-                rating: 4.7,
-                reviews: [
-                    {
-                        name: "Ali",
-                        date: "2025-04-01",
-                        rating: 5,
-                        text: "Absolutely love it!"
-                    },
-                    {
-                        name: "Nora",
-                        date: "2025-03-20",
-                        rating: 4,
-                        text: "Stylish and comfy."
-                    }
-                ],
-                isNew: true,
-                isBestSeller: false,
-                isOnSale: true,
-                discountPercentage: 20,
-            },
-            {
-                id: 201,
-                name: "King Size Bed Frame",
-                category: "Beds",
-                originalPrice: 1624.99,
-                salePrice: 1299.99,
-                image: "https://eg-rv.homzmart.net/catalog/product/e/n/eng.fur.36-2_1.jpg",
-                thumbnails: [
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSstIz5iT-l_x2vjfGmUyEQ17yOT5xgr03og&s",
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ9TbqQJt4UtqlFf7S7ZSvWzq_vZjlMmTADQ&s",
-                    "https://media.istockphoto.com/id/1068258892/photo/real-photo-of-a-leather-couch-in-a-living-room-interior.jpg?s=612x612&w=0&k=20&c=BroDHN5n3pk0HIvKTxCksciT1ZhoodzuCgcxQzmAUPc=",
-                    "https://www.elhelowgroup.com/wp-content/uploads/2023/06/york-sofa-elhelow-group-6-600x400.jpg"
-                ],
-                description: "High quality modern leather sofa for your living room.",
-                rating: 4.7,
-                reviews: [
-                    {
-                        name: "Ali",
-                        date: "2025-04-01",
-                        rating: 5,
-                        text: "Absolutely love it!"
-                    },
-                    {
-                        name: "Nora",
-                        date: "2025-03-20",
-                        rating: 4,
-                        text: "Stylish and comfy."
-                    }
-                ],
-                isNew: true,
-                isBestSeller: true,
-                isOnSale: true,
-                discountPercentage: 20,
-            },
-        ],
-    };
-
-    // =============================================
     // DOM Elements
     // =============================================
     const roomTitle = document.getElementById('roomTitle');
@@ -241,8 +347,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const itemsPerPage = 8;
     let currentPage = 1;
     let currentRoom = urlParams.get('room') || 'living-room';
-    let currentProducts = allProducts[currentRoom] || [];
+    let currentProducts = products.filter(p => p.room === currentRoom);
     let filteredProducts = [...currentProducts];
+    let currentProductId = null;
 
     function initPage() {
         initializeTheme();
@@ -289,7 +396,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 ${product.isOnSale ? `
                                     <span class="sale-price">$${product.salePrice.toFixed(2)}</span>
                                     <span class="original-price">$${product.originalPrice.toFixed(2)}</span>
-                                ` : `$${product.salePrice.toFixed(2)}`}
+                                ` : `<span>$${product.salePrice.toFixed(2)}</span>`}
                             </div>
                             <div class="product-actions">
                                 <button class="quick-add-btn"> <i class="fas fa-cart-plus" style="margin-right: 15px;"></i> Add to Cart</button>
@@ -338,7 +445,7 @@ document.addEventListener('DOMContentLoaded', function () {
             </label>
         `).join('');
 
-        // Set salePrice range display
+        // Set price range display
         updatePriceRangeDisplay();
     }
 
@@ -365,7 +472,7 @@ document.addEventListener('DOMContentLoaded', function () {
         renderProducts();
     }
 
-    // Update salePrice Range Display
+    // Update price Range Display
     function updatePriceRangeDisplay() {
         const prices = currentProducts.map(p => p.salePrice);
         const minPrice = Math.min(...prices);
@@ -375,12 +482,29 @@ document.addEventListener('DOMContentLoaded', function () {
         priceRange.max = maxPrice;
         priceRange.value = maxPrice;
 
-        minPriceSpan.textContent = `$${minPrice}`;
-        maxPriceSpan.textContent = `$${maxPrice}`;
+        minPriceSpan.textContent = `$${minPrice.toFixed(2)}`;
+        maxPriceSpan.textContent = `$${maxPrice.toFixed(2)}`;
 
-        // Initialize current salePrice display
-        document.getElementById('currentMinPrice').textContent = `$${minPrice}`;
-        document.getElementById('currentMaxPrice').textContent = `$${maxPrice}`;
+        // Initialize current price display
+        document.getElementById('currentMinPrice').textContent = `$${minPrice.toFixed(2)}`;
+        document.getElementById('currentMaxPrice').textContent = `$${maxPrice.toFixed(2)}`;
+
+        // Update price range colors
+        updatePriceRangeColors();
+    }
+
+    function updatePriceRangeColors() {
+        const currentValue = parseInt(priceRange.value);
+        const minPrice = parseInt(priceRange.min);
+        const maxPrice = parseInt(priceRange.max);
+        const percentage = ((currentValue - minPrice) / (maxPrice - minPrice)) * 100;
+        
+        priceRange.style.background = `linear-gradient(to right, var(--secondary-light) 0%, var(--secondary-light) ${percentage}%, #ddd ${percentage}%, #ddd 100%)`;
+
+        // Dark theme adjustment
+        if (body.classList.contains('dark-theme')) {
+            priceRange.style.background = `linear-gradient(to right, var(--secondary-dark) 0%, var(--secondary-dark) ${percentage}%, #444 ${percentage}%, #444 100%)`;
+        }
     }
 
     // Update Pagination
@@ -389,7 +513,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Update buttons
         prevPageBtn.disabled = currentPage === 1;
-        nextPageBtn.disabled = currentPage === totalPages;
+        nextPageBtn.disabled = currentPage === totalPages || totalPages === 0;
 
         // Update page numbers
         pageNumbers.innerHTML = '';
@@ -410,10 +534,10 @@ document.addEventListener('DOMContentLoaded', function () {
         const sortValue = sortOptions.value;
 
         switch (sortValue) {
-            case 'salePrice-low':
+            case 'price-low':
                 filteredProducts.sort((a, b) => a.salePrice - b.salePrice);
                 break;
-            case 'salePrice-high':
+            case 'price-high':
                 filteredProducts.sort((a, b) => b.salePrice - a.salePrice);
                 break;
             case 'name-asc':
@@ -448,24 +572,11 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
 
-        // salePrice range slider
+        // Price range slider
         priceRange.addEventListener('input', function () {
             const currentValue = parseInt(this.value);
-            const minPrice = parseInt(this.min);
-            const maxPrice = parseInt(this.max);
-
-            // Update current salePrice display
-            document.getElementById('currentMinPrice').textContent = `$${minPrice}`;
-            document.getElementById('currentMaxPrice').textContent = `$${currentValue}`;
-
-            // Update salePrice range colors
-            const percentage = ((currentValue - minPrice) / (maxPrice - minPrice)) * 100;
-            this.style.background = `linear-gradient(to right, var(--secondary-light) 0%, var(--secondary-light) ${percentage}%, #ddd ${percentage}%, #ddd 100%)`;
-
-            // Dark theme adjustment
-            if (body.classList.contains('dark-theme')) {
-                this.style.background = `linear-gradient(to right, var(--secondary-dark) 0%, var(--secondary-dark) ${percentage}%, #444 ${percentage}%, #444 100%)`;
-            }
+            document.getElementById('currentMaxPrice').textContent = `$${currentValue.toFixed(2)}`;
+            updatePriceRangeColors();
         });
 
         // Apply filters button
@@ -508,15 +619,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Quick add to cart
         document.addEventListener('click', function (e) {
-            if (e.target.classList.contains('quick-add-btn')) {
+            if (e.target.classList.contains('quick-add-btn') || e.target.closest('.quick-add-btn')) {
                 const productId = e.target.closest('.product-card').dataset.id;
                 addToCart(productId);
             }
         });
 
+        // Product card click (for popup)
         productsGrid.addEventListener('click', function (e) {
             const productCard = e.target.closest('.product-card');
-            if (productCard && !e.target.classList.contains('quick-add-btn')) {
+            if (productCard && !e.target.classList.contains('quick-add-btn') && !e.target.closest('.quick-add-btn')) {
                 const productId = productCard.dataset.id;
                 openProductPopup(productId);
             }
@@ -527,7 +639,17 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelector('.popup-overlay').addEventListener('click', closeProductPopup);
 
         // Quantity selector
-        setupQuantitySelector();
+        document.querySelector('.quantity-plus').addEventListener('click', function() {
+            const input = document.querySelector('.quantity-input');
+            input.value = parseInt(input.value) + 1;
+        });
+
+        document.querySelector('.quantity-minus').addEventListener('click', function() {
+            const input = document.querySelector('.quantity-input');
+            if (parseInt(input.value) > 1) {
+                input.value = parseInt(input.value) - 1;
+            }
+        });
 
         // Add to cart from popup
         document.querySelector('.add-to-cart-btn').addEventListener('click', function () {
@@ -541,19 +663,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Add to Cart Functionality
     function addToCart(productId, quantity = 1) {
-        const product = currentProducts.find(p => p.id == productId);
+        const product = products.find(p => p.id == productId);
         if (product) {
             alert(`Added ${quantity} ${product.name}(s) to cart!`);
             // Update cart count
             const cartCount = document.querySelector('.cart-count');
-            cartCount.textContent = parseInt(cartCount.textContent) + quantity;
+            cartCount.textContent = parseInt(cartCount.textContent || '0') + quantity;
         }
     }
 
     // Product Detail Popup Functions
     function openProductPopup(productId) {
-        currentProductId = productId; // Store the current product ID
-        const product = currentProducts.find(p => p.id == productId);
+        currentProductId = productId;
+        const product = products.find(p => p.id == productId);
         if (!product) return;
 
         // Set product data in popup
@@ -565,9 +687,9 @@ document.addEventListener('DOMContentLoaded', function () {
         const priceElement = document.getElementById('popupPrice');
         if (product.isOnSale) {
             priceElement.innerHTML = `
-            <span class="sale-price">$${product.salePrice.toFixed(2)}</span>
-            <span class="original-price">$${product.originalPrice.toFixed(2)}</span>
-        `;
+                <span class="sale-price">$${product.salePrice.toFixed(2)}</span>
+                <span class="original-price">$${product.originalPrice.toFixed(2)}</span>
+            `;
         } else {
             priceElement.textContent = `$${product.salePrice.toFixed(2)}`;
         }
@@ -580,7 +702,7 @@ document.addEventListener('DOMContentLoaded', function () {
         thumbnailsContainer.innerHTML = '';
 
         // Add all thumbnails from the product data
-        product.thumbnails.forEach((thumbnailSrc, index) => {
+        [product.image, ...product.thumbnails].forEach((thumbnailSrc, index) => {
             const thumbnail = document.createElement('img');
             thumbnail.src = thumbnailSrc;
             thumbnail.alt = `${product.name} thumbnail ${index + 1}`;
@@ -599,13 +721,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 const reviewItem = document.createElement('div');
                 reviewItem.className = 'review-item';
                 reviewItem.innerHTML = `
-                <div class="review-header">
-                    <span class="review-author">${review.name}</span>
-                    <span class="review-date">${review.date}</span>
-                    <div class="review-stars">${renderStars(review.rating)}</div>
-                </div>
-                <p class="review-text">${review.text}</p>
-            `;
+                    <div class="review-header">
+                        <span class="review-author">${review.name}</span>
+                        <span class="review-date">${review.date}</span>
+                        <div class="review-stars">${renderStars(review.rating)}</div>
+                    </div>
+                    <p class="review-text">${review.text}</p>
+                `;
                 reviewsContainer.appendChild(reviewItem);
             });
         } else {
@@ -620,25 +742,6 @@ document.addEventListener('DOMContentLoaded', function () {
     function closeProductPopup() {
         document.getElementById('productDetailPopup').style.display = 'none';
         document.body.style.overflow = 'auto';
-    }
-
-    // Quantity selector functionality
-    function setupQuantitySelector() {
-        document.querySelectorAll('.quantity-plus').forEach(btn => {
-            btn.addEventListener('click', function () {
-                const input = this.parentNode.querySelector('.quantity-input');
-                input.value = parseInt(input.value) + 1;
-            });
-        });
-
-        document.querySelectorAll('.quantity-minus').forEach(btn => {
-            btn.addEventListener('click', function () {
-                const input = this.parentNode.querySelector('.quantity-input');
-                if (parseInt(input.value) > 1) {
-                    input.value = parseInt(input.value) - 1;
-                }
-            });
-        });
     }
 
     // Initialize the page
