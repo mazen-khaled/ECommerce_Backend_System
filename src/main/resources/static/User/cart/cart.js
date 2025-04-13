@@ -3482,7 +3482,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const themeToggle = document.querySelector('.theme-toggle');
     const body = document.body;
     const logo = document.querySelector('.logo');
-    const footerLogo = document.querySelector('.class="logo-my-footer');
+    const footerLogo = document.querySelector('.logo-my-footer');
 
     // Check for saved theme preference or use preferred color scheme
     const savedTheme = localStorage.getItem('theme') ||
