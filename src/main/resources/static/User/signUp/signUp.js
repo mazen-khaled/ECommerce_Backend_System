@@ -4,7 +4,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const body = document.body;
     const logo = document.querySelector('.logo');
     const signupLogo = document.querySelector('.signup-logo');
-    
+    const footerLogo = document.querySelector('.logo-my-footer');
+
     // Check for saved theme preference or use preferred color scheme
     const savedTheme = localStorage.getItem('theme') || 
                        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
@@ -14,9 +15,11 @@ document.addEventListener('DOMContentLoaded', function() {
         themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
         logo.src = '../resources/logo-dark.png';
         signupLogo.src = '../resources/logo-dark.png';
+        footerLogo.src = '../resources/logo-dark.png';
     } else {
         logo.src = '../resources/logo-light.png';
         signupLogo.src = '../resources/logo-light.png';
+        footerLogo.src = '../resources/logo-light.png';
     }
     
     themeToggle.addEventListener('click', function() {
@@ -27,11 +30,13 @@ document.addEventListener('DOMContentLoaded', function() {
             themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
             logo.src = '../resources/logo-dark.png';
             signupLogo.src = '../resources/logo-dark.png';
+            footerLogo.src = '../resources/logo-dark.png';
         } else {
             localStorage.setItem('theme', 'light');
             themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
             logo.src = '../resources/logo-light.png';
             signupLogo.src = '../resources/logo-light.png';
+            footerLogo.src = '../resources/logo-light.png';
         }
     });
     

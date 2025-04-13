@@ -864,18 +864,24 @@ body.dark-theme {
     flex: 1;
 }
 
-.main-image img {
-    width: 100%;
-    height: auto;
-    max-height: 400px;
-    object-fit: contain;
+.main-image {
+    height: 400px;
     border-radius: 4px;
+}
+
+#popupMainImage {
+    width: 100%;
+    max-height: 350px;
+    border-radius: 4px;
+    object-fit:contain;
 }
 
 .thumbnails {
     display: flex;
     gap: 10px;
     margin-top: 15px;
+    align-items: center;
+    justify-content: center;
 }
 
 .thumbnails img {
@@ -1019,6 +1025,49 @@ body.dark-theme {
 .review-text {
     margin-top: 5px;
     line-height: 1.5;
+}
+
+/* Add these styles to your CSS file */
+.product-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.wishlist-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #ccc;
+    transition: all 0.3s ease;
+    padding: 0.5rem;
+}
+
+.wishlist-btn.in-wishlist {
+    color: #ff6b6b;
+}
+
+.wishlist-btn:hover {
+    transform: scale(1.1);
+}
+
+.toast-notification {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ed1313;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 4px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 4000;
+}
+
+.toast-notification.show {
+    opacity: 1;
 }
 
 @keyframes popupFadeIn {

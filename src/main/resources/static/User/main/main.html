@@ -25,7 +25,12 @@
                     <div class="thumbnails" id="popupThumbnails"></div>
                 </div>
                 <div class="popup-details">
-                    <h2 id="popupProductName"></h2>
+                    <div class="product-header">
+                        <h2 id="popupProductName"></h2>
+                        <button class="wishlist-btn" id="popupWishlistBtn">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
                     <div class="price-rating">
                         <div class="popup-price" id="popupPrice"></div>
                         <div class="popup-rating" id="popupRating"></div>
@@ -43,7 +48,8 @@
                             <button class="quantity-plus">+</button>
                         </div>
                     </div>
-                    <button class="add-to-cart-btn"><i class="fas fa-cart-plus" style="margin-right: 15px; color: #000;"></i>Add to Cart</button>
+                    <button class="add-to-cart-btn"><i class="fas fa-cart-plus"
+                            style="margin-right: 15px; color: #000;"></i>Add to Cart</button>
                     <div class="popup-reviews">
                         <h3>Reviews</h3>
                         <div class="reviews-container" id="popupReviews"></div>
@@ -60,7 +66,8 @@
             <ul class="nav-links">
                 <li><a href="../dashboard/dashboard.html"><i class="fas fa-user"></i> Profile</a></li>
                 <li class="cart-item">
-                    <a href="../cart/cart.html"><i class="fas fa-shopping-cart"></i> Cart <span class="cart-count">0</span></a>
+                    <a href="../cart/cart.html"><i class="fas fa-shopping-cart"></i> Cart <span
+                            class="cart-count">0</span></a>
                 </li>
                 <li><a href="#my-footer"><i class="fas fa-envelope"></i> Contact</a></li>
                 <li>
@@ -100,7 +107,7 @@
     <footer id="my-footer" class="my-footer">
         <div class="my-footer-container">
             <div class="my-footer-logo">
-                <img src="../resources/logo-dark.png" alt="Regalith Logo">
+                <img src="../resources/logo-light.png" alt="Regalith Logo" class="logo-my-footer">
                 <p>Elegance, Carved in Time</p>
             </div>
             <div class="my-footer-links">
