@@ -3673,7 +3673,7 @@ document.addEventListener('DOMContentLoaded', function () {
             document.querySelectorAll('input[name="category"]:checked')
         ).map(el => el.value);
 
-        const maxPrice = parseFloat(priceRange.value);
+        const maxPrice = parseFloat(priceRange.value)+1;
         const minPrice = parseFloat(priceRange.min);
 
         filteredProducts = currentProducts.filter(product => {
